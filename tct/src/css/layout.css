@@ -28,7 +28,7 @@
     overflow-y: auto;
 }
 
-{/* small section 배치용 */}
+/* small section 배치용 */
 .form-group {
     display: flex;
     flex-direction: column;
@@ -83,7 +83,7 @@ input {
     margin-bottom: 10px;
 }
 
-{/* 사진 관련 css */}
+/* 사진 관련 css */
 .photo-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);

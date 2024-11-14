@@ -1,15 +1,15 @@
 // App.js
 import React from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import MainGeneral from './MainPage/MainGeneral';
 import Reservation1 from './Reservation1';
-import Reservation2 from './Reservation2';
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Reservation1 />} />
-        <Route path="/reservation-summary" element={<Reservation2 />} />
+        <Route path="/" element={<MainGeneral />} />
+        <Route path="/reservation1" element={<Reservation1 />} />
       </Routes>
     </BrowserRouter>
   );
