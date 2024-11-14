@@ -47,14 +47,16 @@ function Join() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isChecked, setIsChecked] = useState(false);
   const [isNotificationOpen, setIsNotificationOpen] = useState(false);
+  const [selectedReservation, setSelectedReservation] = useState(null);
 
   const handleSearch = () => {
-    setIsModalOpen(true);
+    // 검색 로직을 추가하거나 필요한 경우 상태를 업데이트하세요.
+    // setIsModalOpen(true); // 이 부분을 제거하여 '검색' 버튼 클릭 시 모달이 뜨지 않도록 합니다.
   };
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
-    setIsChecked(false); // Reset checkbox
+    setIsChecked(false); // 체크박스 초기화
   };
 
   const handleCheckboxChange = () => {
@@ -69,6 +71,24 @@ function Join() {
   const closeNotification = () => {
     setIsNotificationOpen(false);
   };
+
+  // 목록에서 '참여' 버튼을 클릭했을 때 호출되는 함수
+  const handleOpenModal = (reservation) => {
+    setSelectedReservation(reservation);
+    setIsModalOpen(true);
+  };
+
+  // 예시로 사용할 예약 데이터
+  const reservationList = [
+    {
+      building: '신공학관',
+      room: '6119',
+      name: '컴공모여라',
+      time: '11/15 9시~',
+      notice: '강의실 사용 시 정숙해 주시기 바랍니다.',
+    },
+    // 필요한 경우 더 많은 예약 데이터를 추가하세요.
+  ];
 
   return (
     <div className="container_main">
@@ -88,9 +108,9 @@ function Join() {
               <select value={selectedRoom} onChange={(e) => setSelectedRoom(e.target.value)}>
                 <option value="">선택하세요</option>
                 {rooms.map((room) => (
-                    <option key={room.id} value={room.id}>
-                      {room.name}
-                    </option>
+                  <option key={room.id} value={room.id}>
+                    {room.name}
+                  </option>
                 ))}
               </select>
             </div>
@@ -101,9 +121,9 @@ function Join() {
               <select value={selectedTag1} onChange={(e) => setSelectedTag1(e.target.value)}>
                 <option value="">선택하세요</option>
                 {tags1.map((tag, index) => (
-                    <option key={index} value={tag}>
-                      {tag}
-                    </option>
+                  <option key={index} value={tag}>
+                    {tag}
+                  </option>
                 ))}
               </select>
             </div>
@@ -112,9 +132,9 @@ function Join() {
               <select value={selectedTag2} onChange={(e) => setSelectedTag2(e.target.value)}>
                 <option value="">선택하세요</option>
                 {tags2.map((tag, index) => (
-                    <option key={index} value={tag}>
-                      {tag}
-                    </option>
+                  <option key={index} value={tag}>
+                    {tag}
+                  </option>
                 ))}
               </select>
             </div>
@@ -131,67 +151,80 @@ function Join() {
           <label className="h4Font">목록</label>
           <table className="data-table">
             <thead>
-            <tr>
-              <th>건물</th>
-              <th>강의실</th>
-              <th>대관명</th>
-              <th>시간</th>
-            </tr>
+              <tr>
+                <th>건물</th>
+                <th>강의실</th>
+                <th>대관명</th>
+                <th>시간</th>
+                <th>참여</th>
+              </tr>
             </thead>
             <tbody>
-            <tr>
-              <td>신공학관</td>
-              <td>6119</td>
-              <td>컴공모여라</td>
-              <td>11/15 9시~</td>
-            </tr>
+              {reservationList.map((reservation, index) => (
+                <tr key={index}>
+                  <td>{reservation.building}</td>
+                  <td>{reservation.room}</td>
+                  <td>{reservation.name}</td>
+                  <td>{reservation.time}</td>
+                  <td>
+                    <button
+                      className="mini-button yellow"
+                      onClick={() => handleOpenModal(reservation)}
+                    >
+                      참여
+                    </button>
+                  </td>
+                </tr>
+              ))}
             </tbody>
           </table>
         </div>
       </main>
 
-      {/* Todo: 잘못된 모달 수정 */}
-      {isModalOpen && (
-          <>
-            <div className="overlay" onClick={handleCloseModal}></div>
-            <div className="modal">
-              <div className="modal-header">선택 정보</div>
-              <div className="modal-content-big">
-                <p>신공학관 6119 컴공모여라</p>
-                <div className="modal-content-big">
-                  <strong>유의사항</strong>
-                  <div style={{
-                    border: '1px solid #ddd',
-                    padding: '10px',
-                    marginTop: '5px',
-                    overflowY: 'auto',
-                    maxHeight: '100px'
-                  }}>
-                    승주는 개꿀초입니다 승주는 개꿀초입니다...
-                  </div>
-                </div>
+      {/* 참여 모달 */}
+      {isModalOpen && selectedReservation && (
+        <div className="modal-overlay" onClick={handleCloseModal}>
+          <div className="modal-content-big" onClick={(e) => e.stopPropagation()}>
+            <h2>선택 정보</h2>
+            <p>
+              {selectedReservation.building} {selectedReservation.room} {selectedReservation.name}
+            </p>
+            <div>
+              <strong>유의사항</strong>
+              <div style={{
+                border: '1px solid #ddd',
+                padding: '10px',
+                marginTop: '5px',
+                overflowY: 'auto',
+                maxHeight: '100px'
+              }}>
+                {selectedReservation.notice}
               </div>
-              <div className="modal-footer">
-                <div className="checkbox">
-                  <input type="checkbox" id="agree" checked={isChecked} onChange={handleCheckboxChange}/>
-                  <label htmlFor="agree" style={{marginLeft: '5px'}}>위 내용에 동의합니다</label>
-                </div>
-                <button
-                    className={`modal-button ${isChecked ? '' : 'disabled'}`}
-                    disabled={!isChecked}
-                    onClick={handleParticipation}
-                >
-                  참여
-                </button>
+            </div>
+            <div className="modal-footer">
+              <div className="checkbox">
+                <input type="checkbox" id="agree" checked={isChecked} onChange={handleCheckboxChange}/>
+                <label htmlFor="agree" style={{marginLeft: '5px'}}>위 내용에 동의합니다</label>
+              </div>
+              <button
+                className={`modal-button ${isChecked ? '' : 'disabled'}`}
+                disabled={!isChecked}
+                onClick={handleParticipation}
+              >
+                참여
+              </button>
             </div>
           </div>
-        </>
+        </div>
       )}
 
+      {/* 참여 완료 모달 */}
       {isNotificationOpen && (
-        <div className="modal">
-          <p>참여되었습니다</p>
-          <button className="modal-button" onClick={closeNotification}>확인</button>
+        <div className="modal-overlay" onClick={closeNotification}>
+          <div className="modal-content-small" onClick={(e) => e.stopPropagation()}>
+            <p>참여되었습니다</p>
+            <button className="modal-button" onClick={closeNotification}>확인</button>
+          </div>
         </div>
       )}
     </div>
