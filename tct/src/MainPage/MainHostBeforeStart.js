@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import '../css/Main.css';
+import '../css/button.css';
 import MainHeader from "./MainHeader";
 import MainParticipating from "./MainParticipating";
 import { useNavigateToNextPage } from './nextMainPage';

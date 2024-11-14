@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import '../css/Main.css';
+import '../css/button.css';
 import '../css/layout.css'
 import '../css/modal.css';
 import MainGeneral from "./MainGeneral";

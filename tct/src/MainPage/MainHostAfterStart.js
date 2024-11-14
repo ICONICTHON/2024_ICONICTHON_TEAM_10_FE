@@ -1,5 +1,5 @@
 import React from 'react';
-import '../css/Main.css'
+import '../css/button.css'
 import MainHeader from "./MainHeader";
 import MainHostBeforeStart from "./MainHostBeforeStart";
 import {useNavigateToNextPage} from "./nextMainPage";

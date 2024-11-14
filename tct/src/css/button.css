@@ -69,3 +69,16 @@
   transition: transform 0.2s, background-color 0.3s;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
 }
+
+.mini-button {
+  width: 30%;
+  padding: 15px 0;
+  font-family: var(--main-font-bold);
+  font-size: 20px;
+  font-weight: bold;
+  color: rgba(0, 0, 0, 0.91);
+  border: none;
+  border-radius: 8px;
+  transition: transform 0.2s, background-color 0.3s;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
