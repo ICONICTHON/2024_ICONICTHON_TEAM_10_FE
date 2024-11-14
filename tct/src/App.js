@@ -7,6 +7,7 @@ import Reservation1 from './Reservation1';
 import Reservation2 from './Reservation2';
 import Join from './Join';
 import ReservationInfo from './ReservationInfo';
+import MainParticipating from './MainPage/MainParticipating';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
       <Routes>
         <Route path="/" element={<MainGeneral />} />
         <Route path="/mainHostBeforeStart" element={<MainHostBeforeStart />} />
+        <Route path="/mainParticipating" element={<MainParticipating />} />
         <Route path="/reservation1" element={<Reservation1 />} />
         <Route path="/reservation2" element={<Reservation2 />} />
         <Route path="/Join" element={<Join />} />
