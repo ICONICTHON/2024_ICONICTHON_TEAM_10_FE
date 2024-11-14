@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './Main.css';
+import '../css/Main.css';
 import MainGeneral from "./MainGeneral";
 import MainHeader from "./MainHeader";
 import { useNavigateToNextPage } from './nextMainPage';
@@ -24,9 +24,9 @@ function MainParticipating() {
     }
 
     return (
-        <div className="container">
+        <div className="container_main">
             <MainHeader />
-            <main className="button-container">
+            <main className="main_button-container">
                 <button className="button_main blue">대관하기</button>
                 <button className="button_main blue">참여하기</button>
                 <button className="button_main red" onClick={handleFirstModalOpen}>퇴실하기</button>
@@ -48,7 +48,7 @@ function MainParticipating() {
                             <div className="photo-box"></div>
                             <div className="photo-box"></div>
                         </div>
-                        <button className="button_main_disabled" onClick={handleSecondModalOpen}>퇴실</button>
+                        <button className="button_modal_disabled" onClick={handleSecondModalOpen}>퇴실</button>
                         <button className="modal-close" onClick={handleFirstModalClose}>닫기</button>
                     </div>
                 </div>
