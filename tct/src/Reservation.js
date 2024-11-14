@@ -5,7 +5,10 @@ function Reservation() {
   const [selectedRoom, setSelectedRoom] = useState('');
   const [selectedDate, setSelectedDate] = useState('');
   const [selectedTime, setSelectedTime] = useState('');
-
+  const [customTag, setCustomTag] = useState('');
+  const [tag1, setTag1] = useState('');
+  const [tag2, setTag2] = useState('');
+  
   const handleRoomChange = (event) => {
     setSelectedRoom(event.target.value);
   };
@@ -28,6 +31,26 @@ function Reservation() {
 
     console.log('전송할 데이터:', JSON.stringify(reservationData));
     fetch('http://localhost:8000/api/select_classroom', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(reservationData),
+    })
+    .then(response => response.json())
+    .then(data => console.log(data))
+    .catch(error => console.error('Error:', error));
+  };
+
+  const handleSubmit = () => {
+    const reservationData = {
+      custom_tag: customTag,
+      tag1: tag1,
+      tag2: tag2,
+    };
+
+    console.log('전송할 데이터:', JSON.stringify(reservationData));
+    fetch('http://localhost:8000/api/select_classroom/1', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -130,6 +153,40 @@ function Reservation() {
           ))}
         </div>
       </div>
+
+      <div className="reservation-details">
+        <label>대관명</label>
+        <input
+          type="text"
+          placeholder="여기에 입력하세요"
+          value={customTag}
+          onChange={(e) => setCustomTag(e.target.value)}
+        />
+      </div>
+
+      <div className="dropdown-container">
+        <div className="dropdown">
+          <label>태그1</label>
+          <select value={tag1} onChange={(e) => setTag1(e.target.value)}>
+            <option value="">선택</option>
+            <option value="회의">회의</option>
+            <option value="공부">공부</option>
+            <option value="강의">강의</option>
+            <option value="시험">시험</option>
+          </select>
+        </div>
+
+        <div className="dropdown">
+          <label>태그2</label>
+          <select value={tag2} onChange={(e) => setTag2(e.target.value)}>
+            <option value="">선택</option>
+            <option value="잡담 가능">잡담 가능</option>
+            <option value="정숙">정숙</option>
+          </select>
+        </div>
+      </div>
+
+      <button className="next-button" onClick={handleSubmit}>다음</button>
     </div>
   );
 }
