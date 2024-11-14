@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import '../css/Main.css';
 import '../css/layout.css'
 import '../css/modal.css';
@@ -10,6 +11,7 @@ function MainParticipating() {
     const { showNextPage, handleNextPageClick } = useNavigateToNextPage();
     const [isFirstModalOpen, setFirstModalOpen] = useState(false);
     const [isSecondModalOpen, setSecondModalOpen] = useState(false);
+    const navigate = useNavigate();
 
     const handleFirstModalOpen = () => setFirstModalOpen(true);
     const handleFirstModalClose = () => setFirstModalOpen(false);
@@ -21,6 +23,14 @@ function MainParticipating() {
 
     const handleSecondModalClose = () => setSecondModalOpen(false);
 
+    const handleReservationClick = () => {
+        navigate('/reservation1');
+    };
+
+    const handleJoinClick = () => {
+        navigate('Join');
+    }
+
     if (showNextPage) {
         return <MainGeneral />;
     }
@@ -29,8 +39,8 @@ function MainParticipating() {
         <div className="container_main">
             <MainHeader />
             <main className="main_button-container">
-                <button className="button_main blue">대관하기</button>
-                <button className="button_main blue">참여하기</button>
+                <button className="button_main blue" onClick={handleReservationClick} >대관하기</button>
+                <button className="button_main blue" onClick={handleJoinClick}>참여하기</button>
                 <button className="button_main red" onClick={handleFirstModalOpen}>퇴실하기</button>
                 <button className="button_main red" onClick={handleNextPageClick}>다음 메인페이지</button>
             </main>
