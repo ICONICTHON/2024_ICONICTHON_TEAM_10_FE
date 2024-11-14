@@ -23,6 +23,7 @@ function MainGeneral() {
     navigate('/Join');
   };
 
+
   return (
     <div className="container_main">
       <MainHeader />

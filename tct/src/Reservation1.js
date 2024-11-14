@@ -9,9 +9,9 @@ function Reservation1() {
   const [selectedRoom, setSelectedRoom] = useState('');
   const [selectedDate, setSelectedDate] = useState('');
   const [selectedTime, setSelectedTime] = useState('');
-  const [customTag, setCustomTag] = useState('');
-  const [tag1, setTag1] = useState('');
-  const [tag2, setTag2] = useState('');
+  const [custum_tag, setCustomTag] = useState('');
+  const [tag_1, setTag1] = useState('');
+  const [tag_2, setTag2] = useState('');
   const navigate = useNavigate();
   
   const handleRoomChange = (event) => {
@@ -35,7 +35,7 @@ function Reservation1() {
     };
 
     console.log('전송할 데이터:', JSON.stringify(reservationData));
-    fetch('http://localhost:8000/api/select_classroom', {
+    fetch('http://localhost:8000/api/select_classroom/', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -53,23 +53,28 @@ function Reservation1() {
       room_id: selectedRoom,
       reservation_date: selectedDate,
       start_time: selectedTime,
-      custom_tag: customTag,
-      tag1: tag1,
-      tag2: tag2,
+      custum_tag: custum_tag,
+      tag_1: tag_1,
+      tag_2: tag_2,
     };
 
     console.log('전송할 데이터:', JSON.stringify(reservationData));
-    fetch('http://localhost:8000/api/select_classroom_1/', {
+    fetch('http://localhost:8000/api/select_classroom_2/', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
         },
         body: JSON.stringify(reservationData),
     })
-    .then(response => response.json())
+    .then(response => {
+      if(!response.ok){
+        throw new Error('Network response was not ok');
+      }
+      response.json();
+    })
     .then(data => {
       console.log(data);
-      navigate('/reservation-summary', {state: data});
+      navigate('/reservation2', {state: data});
     })
     .catch(error => console.error('Error:', error));
   };
@@ -167,7 +172,7 @@ function Reservation1() {
         <input
             type="text"
             placeholder="여기에 입력하세요"
-            value={customTag}
+            value={custum_tag}
             onChange={(e) => setCustomTag(e.target.value)}
         />
       </div>
@@ -175,7 +180,7 @@ function Reservation1() {
       <div className="form-row left">
         <div className="form">
           <label className="NormalFont">태그1</label>
-          <select value={tag1} onChange={(e) => setTag1(e.target.value)}>
+          <select value={tag_1} onChange={(e) => setTag1(e.target.value)}>
             <option value="">선택</option>
             <option value="회의">회의</option>
             <option value="공부">공부</option>
@@ -186,7 +191,7 @@ function Reservation1() {
 
         <div className="form">
           <label className="NormalFont">태그2</label>
-          <select value={tag2} onChange={(e) => setTag2(e.target.value)}>
+          <select value={tag_2} onChange={(e) => setTag2(e.target.value)}>
             <option value="">선택</option>
             <option value="잡담 가능">잡담 가능</option>
             <option value="정숙">정숙</option>
