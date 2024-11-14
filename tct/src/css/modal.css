@@ -45,7 +45,7 @@
     border-radius: 5px;
     cursor: pointer;
 }
-.modal-content-big img {
+.img {
     width: 100px;
     height: 100px;
     object-fit: cover;
