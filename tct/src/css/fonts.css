@@ -1,12 +1,12 @@
 @font-face {
     font-family: 'SpoqaHanSans-Medium';
-    src: url('./SpoqaHanSansNeo-Medium.ttf') format('truetype');
+    src: url('SpoqaHanSansNeo-Medium.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
 }
 @font-face {
     font-family: 'SpoqaHanSans-Bold';
-    src: url('./SpoqaHanSansNeo-Bold.ttf') format('truetype');
+    src: url('SpoqaHanSansNeo-Bold.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
 }
