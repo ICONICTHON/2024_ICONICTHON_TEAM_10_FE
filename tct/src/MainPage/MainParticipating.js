@@ -168,7 +168,7 @@ function MainParticipating() {
             {isWarningModalOpen && (
                 <div className="modal-overlay">
                     <div className="modal-content-small">
-                        <label className="h4Font">사진을 더 찍어주세요</label>
+                        <label className="h4Font">병신아, 사진을 더 찍어라!</label>
                         <button className="modal-close NormalFont" onClick={handleWarningModalClose}>확인</button>
                     </div>
                 </div>
