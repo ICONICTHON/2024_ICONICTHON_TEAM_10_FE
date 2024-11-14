@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import '../css/Main.css';
+import '../css/button.css';
 import MainHeader from "./MainHeader";
 import MainParticipating from "./MainParticipating";
 import { useNavigateToNextPage } from './nextMainPage';

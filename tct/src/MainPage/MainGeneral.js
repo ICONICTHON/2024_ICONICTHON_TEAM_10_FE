@@ -1,7 +1,7 @@
 // MainGeneral.js
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import '../css/Main.css';
+import '../css/button.css';
 import '../css/layout.css';
 import MainHeader from './MainHeader';
 import MainHostAfterStart from './MainHostAfterStart';
@@ -20,8 +20,9 @@ function MainGeneral() {
   };
 
   const handleJoinClick = () => {
-    navigate('Join');
-  }
+    navigate('/Join');
+  };
+
 
   return (
     <div className="container_main">

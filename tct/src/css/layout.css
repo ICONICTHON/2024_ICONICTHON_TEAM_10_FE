@@ -28,6 +28,14 @@
     overflow-y: auto;
 }
 
+/* 여백 관련 */
+.top {
+    margin-top: 20px;
+}
+.bottom {
+    margin-bottom: 20px;
+}
+
 /* small section 배치용 */
 .form-group {
     display: flex;
@@ -44,6 +52,9 @@
 .mid {
     justify-content: center;
 }
+.left {
+    justify-content: left;
+}
 
 .form {
     display: flex;
@@ -51,7 +62,7 @@
     padding: 10px;
 }
 
-
+/* input, select, option, table 기본 설정 */
 input {
     width: 100%;
     margin-top: 5px;
@@ -60,6 +71,34 @@ input {
     border: 1px solid #ccc;
     border-radius: 5px;
     box-sizing: border-box;
+}
+
+select, option {
+    min-width: 100px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 10px;
+}
+
+table {
+    border: 1px black solid;
+    width: 100%;
+}
+thead {
+    border: 1px black solid;
+    background-color: #ccbd34;
+}
+th {
+    padding: 0;
+    border: 1px black solid;
+    text-align: center;
+}
+
+td {
+    font-family: --main-font-medium;
+    font-size: 14px;
+    text-align: center;
+
 }
 
 .section {
@@ -99,3 +138,28 @@ input {
     border: 1px solid #ced4da;
     border-radius: 5px;
 }
+
+/* 대관 전용 css */
+.time-options {
+    display: grid;
+    grid-template-columns: repeat(4, 5fr);
+    row-gap: 10px;
+    column-gap: 5px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.time-options button {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    background-color: #f8f8f8;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.time-options button.selected {
+    background-color: #4CAF50;
+    color: white;
+}
+

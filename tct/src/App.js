@@ -7,7 +7,6 @@ import Reservation2 from './Reservation2';
 import Join from './Join';
 import ReservationInfo from './ReservationInfo';
 
-
 function App() {
   return (
     <BrowserRouter>

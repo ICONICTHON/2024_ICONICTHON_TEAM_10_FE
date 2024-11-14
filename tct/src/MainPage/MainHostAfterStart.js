@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import '../css/Main.css'
+import '../css/button.css';
 import MainHeader from "./MainHeader";
 import MainHostBeforeStart from "./MainHostBeforeStart";
 import {useNavigateToNextPage} from "./nextMainPage";
@@ -12,6 +12,7 @@ function MainHostAfterStart() {
     if (showNextPage) {
         return <MainHostBeforeStart />;
     }
+
 
     const handleReservationClick = () => {
         navigate('/reservation1');

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Header from "./MainPage/MainHeader";
 
 const rooms = [
   { id: '2158', name: '일반생물학실험실' },
@@ -71,115 +72,117 @@ function Join() {
 
   return (
     <div className="container_main">
-      <header className="header">
-        <h1 className="logo">TCT</h1>
-        <div className="profile-icon">👤</div>
-      </header>
-      <main className="main-content">
-        <h2 className="title">참여하기</h2>
-
+      <Header/>
+      <main className="reservation-container">
+        <label className="h4Font">참여하기</label>
         <div className="form-group">
           <div className="form-row">
-            <label>
-              건물
+            <div className="form">
+              <label className="NormalFont">건물</label>
               <select disabled>
                 <option>신공학관</option>
               </select>
-            </label>
-            <label>
-              강의실
+            </div>
+            <div className="form">
+              <label className="NormalFont">강의실</label>
               <select value={selectedRoom} onChange={(e) => setSelectedRoom(e.target.value)}>
                 <option value="">선택하세요</option>
                 {rooms.map((room) => (
-                  <option key={room.id} value={room.id}>
-                    {room.name}
-                  </option>
+                    <option key={room.id} value={room.id}>
+                      {room.name}
+                    </option>
                 ))}
               </select>
-            </label>
+            </div>
           </div>
-
           <div className="form-row">
-            <label>
-              태그₁
+            <div className="form">
+              <label className="NormalFont">태그1</label>
               <select value={selectedTag1} onChange={(e) => setSelectedTag1(e.target.value)}>
                 <option value="">선택하세요</option>
                 {tags1.map((tag, index) => (
-                  <option key={index} value={tag}>
-                    {tag}
-                  </option>
+                    <option key={index} value={tag}>
+                      {tag}
+                    </option>
                 ))}
               </select>
-            </label>
-            <label>
-              태그₂
+            </div>
+            <div className="form">
+              <label className="NormalFont">태그2</label>
               <select value={selectedTag2} onChange={(e) => setSelectedTag2(e.target.value)}>
                 <option value="">선택하세요</option>
                 {tags2.map((tag, index) => (
-                  <option key={index} value={tag}>
-                    {tag}
-                  </option>
+                    <option key={index} value={tag}>
+                      {tag}
+                    </option>
                 ))}
               </select>
-            </label>
+            </div>
           </div>
-
-          <label className="full-width">
-            대관명
-            <input type="text" placeholder="여기에 입력하세요" />
-          </label>
+          <div className="form">
+            <label className="NormalFont">대관명</label>
+            <input className="SmallFont" type="text" placeholder="여기에 입력하세요"/>
+          </div>
         </div>
 
-        <button className="search-button" onClick={handleSearch}>검색</button>
+        <button className="mini-button yellow" onClick={handleSearch}>검색</button>
 
-        <h3 className="subtitle">목록</h3>
-
-        <table className="data-table">
-          <thead>
+        <div className="reservation-container top bottom">
+          <label className="h4Font">목록</label>
+          <table className="data-table">
+            <thead>
             <tr>
               <th>건물</th>
               <th>강의실</th>
               <th>대관명</th>
               <th>시간</th>
             </tr>
-          </thead>
-          <tbody>
+            </thead>
+            <tbody>
             <tr>
               <td>신공학관</td>
               <td>6119</td>
               <td>컴공모여라</td>
               <td>11/15 9시~</td>
             </tr>
-          </tbody>
-        </table>
+            </tbody>
+          </table>
+        </div>
       </main>
 
+      {/* Todo: 잘못된 모달 수정 */}
       {isModalOpen && (
-        <>
-          <div className="overlay" onClick={handleCloseModal}></div>
-          <div className="modal">
-            <div className="modal-header">선택 정보</div>
-            <div className="modal-content-big">
-              <p>신공학관 6119 컴공모여라</p>
+          <>
+            <div className="overlay" onClick={handleCloseModal}></div>
+            <div className="modal">
+              <div className="modal-header">선택 정보</div>
               <div className="modal-content-big">
-                <strong>유의사항</strong>
-                <div style={{ border: '1px solid #ddd', padding: '10px', marginTop: '5px', overflowY: 'auto', maxHeight: '100px' }}>
-                  승주는 개꿀초입니다 승주는 개꿀초입니다...
+                <p>신공학관 6119 컴공모여라</p>
+                <div className="modal-content-big">
+                  <strong>유의사항</strong>
+                  <div style={{
+                    border: '1px solid #ddd',
+                    padding: '10px',
+                    marginTop: '5px',
+                    overflowY: 'auto',
+                    maxHeight: '100px'
+                  }}>
+                    승주는 개꿀초입니다 승주는 개꿀초입니다...
+                  </div>
                 </div>
               </div>
-            </div>
-            <div className="modal-footer">
-              <div className="checkbox">
-                <input type="checkbox" id="agree" checked={isChecked} onChange={handleCheckboxChange} />
-                <label htmlFor="agree" style={{ marginLeft: '5px' }}>위 내용에 동의합니다</label>
-              </div>
-              <button
-                className={`modal-button ${isChecked ? '' : 'disabled'}`}
-                disabled={!isChecked}
-                onClick={handleParticipation}
-              >
-                참여
-              </button>
+              <div className="modal-footer">
+                <div className="checkbox">
+                  <input type="checkbox" id="agree" checked={isChecked} onChange={handleCheckboxChange}/>
+                  <label htmlFor="agree" style={{marginLeft: '5px'}}>위 내용에 동의합니다</label>
+                </div>
+                <button
+                    className={`modal-button ${isChecked ? '' : 'disabled'}`}
+                    disabled={!isChecked}
+                    onClick={handleParticipation}
+                >
+                  참여
+                </button>
             </div>
           </div>
         </>

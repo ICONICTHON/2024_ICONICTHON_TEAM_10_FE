@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
-import './Reservation1.css';
+// import './Reservation1.css';
+import Header from "./MainPage/MainHeader";
+import './css/layout.css';
+import './css/fonts.css';
 import { useNavigate } from 'react-router-dom';
 
 function Reservation1() {
@@ -113,74 +116,70 @@ function Reservation1() {
   ];
 
   const times = [
-    '11:00', '11:30', '12:00', '12:30', '1:00', '1:30', '2:00', '2:30',
-    '3:00', '3:30', '4:00', '4:30', '5:00', '5:30', '6:00', '6:30', '7:00',
-    '7:30', '8:00', '8:30', '9:00',
+    '11:00', '11:30', '12:00', '12:30', '13:00', '13:30', '14:00', '14:30',
+    '15:00', '15:30', '16:00', '16:30', '17:00', '17:30', '18:00', '18:30', '19:00',
+    '19:30', '20:00', '20:30', '21:00', '21:30', '22:00'
   ];
 
   return (
     <div className="reservation-container">
-      <header>
-        <h1 className="logo">TCT</h1>
-        <span className="profile-icon">👤</span>
-      </header>
-
-      <h2 className="title">대관하기</h2>
-
-      <div className="dropdown-container">
-        <div className="dropdown">
-          <label>건물</label>
+      <Header />
+      <label className="h4Font">대관하기</label>
+      <div className="form-group">
+        <div className="form">
+          <label className="NormalFont">건물</label>
           <select value="신공학관" disabled>
             <option value="신공학관">신공학관(기숙사)</option>
           </select>
         </div>
 
-        <div className="dropdown">
-          <label>강의실</label>
+        <div className="form">
+          <label className="NormalFont">강의실</label>
           <select value={selectedRoom} onChange={handleRoomChange}>
             <option value="">강의실 선택</option>
             {rooms.map((room) => (
-              <option key={room.id} value={room.id}>
-                {room.id} ({room.name})
-              </option>
+                <option key={room.id} value={room.id}>
+                  {room.id} ({room.name})
+                </option>
             ))}
           </select>
         </div>
-      </div>
 
-      <div className="date-picker">
-        <label>날짜</label>
-        <input type="date" value={selectedDate} onChange={handleDateChange} />
-      </div>
+        <div className="form">
+          <label className="NormalFont">날짜</label>
+          <input className="SmallFont" type="date" value={selectedDate} onChange={handleDateChange}/>
+        </div>
 
-      <div className="time-picker">
-        <label>시간</label>
-        <div className="time-options">
-          {times.map((time) => (
-            <button
-              key={time}
-              className={selectedTime === time ? 'selected' : ''}
-              onClick={() => handleTimeSelect(time)}
-            >
-              {time}
-            </button>
-          ))}
+        <div className="form">
+          <label className="NormalFont">시간</label>
+          <div className="time-options">
+            {times.map((time) => (
+                <button
+                    key={time}
+                    className={selectedTime === time ? 'selected' : ''}
+                    onClick={() => handleTimeSelect(time)}
+                >
+                  {time}
+                </button>
+            ))}
+          </div>
         </div>
       </div>
 
-      <div className="reservation-details">
-        <label>대관명</label>
+
+      <div className="form-group">
+        <label className="NormalFont">대관명</label>
         <input
-          type="text"
-          placeholder="여기에 입력하세요"
-          value={custum_tag}
-          onChange={(e) => setCustomTag(e.target.value)}
+            type="text"
+            placeholder="여기에 입력하세요"
+            value={custum_tag}
+            onChange={(e) => setCustomTag(e.target.value)}
         />
       </div>
 
-      <div className="dropdown-container">
-        <div className="dropdown">
-          <label>태그1</label>
+      <div className="form-row left">
+        <div className="form">
+          <label className="NormalFont">태그1</label>
           <select value={tag_1} onChange={(e) => setTag1(e.target.value)}>
             <option value="">선택</option>
             <option value="회의">회의</option>
@@ -190,8 +189,8 @@ function Reservation1() {
           </select>
         </div>
 
-        <div className="dropdown">
-          <label>태그2</label>
+        <div className="form">
+          <label className="NormalFont">태그2</label>
           <select value={tag_2} onChange={(e) => setTag2(e.target.value)}>
             <option value="">선택</option>
             <option value="잡담 가능">잡담 가능</option>
@@ -200,7 +199,7 @@ function Reservation1() {
         </div>
       </div>
 
-      <button className="next-button" onClick={handleSubmit}>다음</button>
+      <button className="mini-button yellow" onClick={handleSubmit}>다음</button>
     </div>
   );
 }
