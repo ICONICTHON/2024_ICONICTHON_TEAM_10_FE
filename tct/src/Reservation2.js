@@ -1,13 +1,23 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './Reservation2.css';
+import './css/modal.css';
 
 function Reservation2() {
   const [reservationData, setReservationData] = useState(null);
   const [isChecked, setIsChecked] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false); // 모달 열림 상태 추가
+
+  const navigate = useNavigate();
+
+  const handleMainHostBeforeStartClick = () => {
+    navigate('/mainHostBeforeStart');
+  };
 
   useEffect(() => {
     fetchReservationData();
   }, []);
+
 
   const fetchReservationData = () => {
     fetch('http://localhost:8000/api/get_latest_reservation/', {
@@ -22,6 +32,16 @@ function Reservation2() {
   };
 
   const handleCheckboxChange = () => setIsChecked(!isChecked);
+
+  const handleCompleteClick = () => {
+    // 모달을 열도록 설정
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    // 모달을 닫도록 설정
+    setIsModalOpen(false);
+  };
 
   return (
     <div className="reservation-summary-container">
@@ -55,7 +75,22 @@ function Reservation2() {
         <input type="checkbox" checked={isChecked} onChange={handleCheckboxChange} />
       </label>
 
-      <button className="complete-button" disabled={!isChecked}>완료</button>
+      <button
+        className="complete-button"
+        disabled={!isChecked}
+        onClick={handleCompleteClick} // 버튼 클릭 시 모달 열림
+      >
+        완료
+      </button>
+
+      {isModalOpen && (
+        <div className="modal-overlay">
+          <div className="modal-content-small">
+            <p>신청되었습니다</p>
+            <button className="mini-button" onClick={handleMainHostBeforeStartClick}>확인</button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
