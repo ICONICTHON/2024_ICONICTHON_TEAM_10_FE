@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
-import './Reservation.css';
+import './Reservation1.css';
+import { useNavigate } from 'react-router-dom';
 
-function Reservation() {
+function Reservation1() {
   const [selectedRoom, setSelectedRoom] = useState('');
   const [selectedDate, setSelectedDate] = useState('');
   const [selectedTime, setSelectedTime] = useState('');
   const [customTag, setCustomTag] = useState('');
   const [tag1, setTag1] = useState('');
   const [tag2, setTag2] = useState('');
+  const navigate = useNavigate();
   
   const handleRoomChange = (event) => {
     setSelectedRoom(event.target.value);
@@ -44,13 +46,17 @@ function Reservation() {
 
   const handleSubmit = () => {
     const reservationData = {
+      building_name: '신공학관',
+      room_id: selectedRoom,
+      reservation_date: selectedDate,
+      start_time: selectedTime,
       custom_tag: customTag,
       tag1: tag1,
       tag2: tag2,
     };
 
     console.log('전송할 데이터:', JSON.stringify(reservationData));
-    fetch('http://localhost:8000/api/select_classroom/1', {
+    fetch('http://localhost:8000/api/select_classroom_1/', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -58,7 +64,10 @@ function Reservation() {
         body: JSON.stringify(reservationData),
     })
     .then(response => response.json())
-    .then(data => console.log(data))
+    .then(data => {
+      console.log(data);
+      navigate('/reservation-summary', {state: data});
+    })
     .catch(error => console.error('Error:', error));
   };
 
@@ -191,4 +200,4 @@ function Reservation() {
   );
 }
 
-export default Reservation;
+export default Reservation1;
