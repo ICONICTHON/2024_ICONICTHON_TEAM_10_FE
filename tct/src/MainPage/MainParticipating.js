@@ -39,7 +39,7 @@ function MainParticipating() {
     };
 
     const handleJoinClick = () => {
-        navigate('Join');
+        navigate('/Join');
     };
 
     const openCamera = () => {

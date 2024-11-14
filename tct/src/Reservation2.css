@@ -44,7 +44,8 @@
   
   .checkbox-container {
     display: flex;
-    align-items: center;
+    justify-content: flex-end; /* 우측 정렬 */
+    align-items: center; /* 수직 정렬 */
     margin-bottom: 20px;
     font-size: 16px;
   }
@@ -69,4 +70,7 @@
     background-color: #e0e0e0;
     cursor: not-allowed;
   }
-  
+
+  .silverprize{
+    justify-content: center;
+  }

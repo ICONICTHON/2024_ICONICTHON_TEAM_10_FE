@@ -20,7 +20,7 @@ function MainHostBeforeStart() {
     };
 
     const handleJoinClick = () => {
-        navigate('Join');
+        navigate('/Join');
     }
 
     const handleReservationInfoClick = () => {

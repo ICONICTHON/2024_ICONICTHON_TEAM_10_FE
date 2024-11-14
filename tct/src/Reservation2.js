@@ -38,11 +38,6 @@ function Reservation2() {
     setIsModalOpen(true);
   };
 
-  const closeModal = () => {
-    // 모달을 닫도록 설정
-    setIsModalOpen(false);
-  };
-
   return (
     <div className="reservation-summary-container">
       <header>
@@ -75,8 +70,8 @@ function Reservation2() {
       </div>
 
       <label className="checkbox-container">
-        <input type="checkbox" checked={isChecked} onChange={handleCheckboxChange} />
         위 내용에 동의합니다
+        <input type="checkbox" checked={isChecked} onChange={handleCheckboxChange} />
       </label>
 
       <button
@@ -91,7 +86,9 @@ function Reservation2() {
         <div className="modal-overlay">
           <div className="modal-content-small">
             <p>신청되었습니다</p>
-            <button className="mini-button" onClick={handleMainHostBeforeStartClick}>확인</button>
+            <div className = "silverprize">
+              <button className="mini-button yellow" onClick={handleMainHostBeforeStartClick}>확인</button>
+            </div>
           </div>
         </div>
       )}
