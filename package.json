@@ -1,0 +1,14 @@
+{
+  "name": "2024_iconicthon_team_10_fe",
+  "version": "1.0.0",
+  "description": "2024 동국대학교 아코톤 10조 \"틀코톤\"",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "create-react-app": "^5.0.1"
+  }
+}
