@@ -1,7 +1,9 @@
+// ReservationInfo.js
 import React, { useEffect, useState } from 'react';
 import './css/fonts.css';
 import './css/layout.css';
 import './css/modal.css'; // 모달 스타일 추가
+import IoTControlModal from './IoTControlModal'; // IoTControlModal 컴포넌트 임포트
 import MainHeader from "./MainPage/MainHeader";
 
 function ReservationInfo() {
@@ -15,13 +17,9 @@ function ReservationInfo() {
 
   const [isUnlocked, setIsUnlocked] = useState(false);
   const [showUnlockModal, setShowUnlockModal] = useState(false);
-  const [showIoTModal, setShowIoTModal] = useState(false);
-  
-  // Add state variables for toggles
-  const [isLightOn, setIsLightOn] = useState(true);
-  const [isAirConOn, setIsAirConOn] = useState(false);
+  const [showIoTModal, setShowIoTModal] = useState(false); // IoT 모달 상태 관리
 
-  // 서버 연동 시 데이터 가져오기
+  // 서버에서 데이터 가져오기 (현재는 주석 처리되어 있음)
   useEffect(() => {
     /*
     fetch('https://your-api-endpoint.com/api/classroom/')
@@ -39,19 +37,23 @@ function ReservationInfo() {
     */
   }, []);
 
+  // 잠금 해제 버튼 클릭 시 호출되는 함수
   const handleUnlock = () => {
     setIsUnlocked(true);
     setShowUnlockModal(true);
   };
 
+  // 잠금 해제 모달 닫기
   const closeUnlockModal = () => {
     setShowUnlockModal(false);
   };
 
+  // 다음으로 버튼 클릭 시 IoT 모달 표시
   const handleNext = () => {
     setShowIoTModal(true);
   };
 
+  // IoT 모달 닫기
   const closeIoTModal = () => {
     setShowIoTModal(false);
   };
@@ -64,26 +66,26 @@ function ReservationInfo() {
         <div className="form-group">
           <div className="form">
             <label className="NormalFont">대관명</label>
-            <input className="SmallFont" type="text" value={data.custom_tag} readOnly/>
+            <input className="SmallFont" type="text" value={data.custom_tag} readOnly />
           </div>
           <div className="form-row">
             <div className="form">
               <label className="NormalFont">건물</label>
-              <input className="SmallFont" type="text" value={data.building_name} readOnly/>
+              <input className="SmallFont" type="text" value={data.building_name} readOnly />
             </div>
             <div className="form">
               <label className="NormalFont">강의실</label>
-              <input className="SmallFont" type="text" value={data.room_number} readOnly/>
+              <input className="SmallFont" type="text" value={data.room_number} readOnly />
             </div>
           </div>
           <div className="form-row">
             <div className="form">
               <label className="NormalFont">태그1</label>
-              <input className="SmallFont" type="text" value={data.tag_1} readOnly/>
+              <input className="SmallFont" type="text" value={data.tag_1} readOnly />
             </div>
             <div className="form">
               <label className="NormalFont">태그2</label>
-              <input className="SmallFont" type="text" value={data.tag_2} readOnly/>
+              <input className="SmallFont" type="text" value={data.tag_2} readOnly />
             </div>
           </div>
         </div>
@@ -113,39 +115,12 @@ function ReservationInfo() {
         </div>
 
         <button className="button_main yellow" onClick={handleNext}>
-          다음으로 
+          다음으로
         </button>
       </main>
 
-      {/* Todo: 제어 버튼 선택 */}
-      {showIoTModal && (
-        <div className="modal-overlay">
-          <div className="modal-content-big">
-            <label className="h4Font">IoT 원격 조정</label>
-            <div className="form-group top bottom">
-              <div className="form-row mid top bottom">
-                <label className="NormalFont mid-column">조명</label>
-                <img
-                  className="toggle_image"
-                  src={isLightOn ? "toggle_on.png" : "toggle_off.png"}
-                  onClick={() => setIsLightOn(!isLightOn)}
-                />
-              </div>
-              <div className="form-row mid top bottom">
-                <label className="NormalFont mid-column">냉방</label>
-                <img
-                  className="toggle_image"
-                  src={isAirConOn ? "toggle_on.png" : "toggle_off.png"}
-                  onClick={() => setIsAirConOn(!isAirConOn)}
-                />
-              </div>
-            </div>
-            <button className="button_main yellow" onClick={closeIoTModal}>
-              닫기
-            </button>
-          </div>
-        </div>
-      )}
+      {/* IoT 제어 모달 */}
+      <IoTControlModal isOpen={showIoTModal} onClose={closeIoTModal} />
     </div>
   );
 }
