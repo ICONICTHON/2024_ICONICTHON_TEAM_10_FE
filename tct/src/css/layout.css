@@ -28,6 +28,14 @@
     overflow-y: auto;
 }
 
+/* 여백 관련 */
+.top {
+    margin-top: 20px;
+}
+.bottom {
+    margin-bottom: 20px;
+}
+
 /* small section 배치용 */
 .form-group {
     display: flex;
@@ -54,7 +62,7 @@
     padding: 10px;
 }
 
-
+/* input, select, option, table 기본 설정 */
 input {
     width: 100%;
     margin-top: 5px;
@@ -70,6 +78,27 @@ select, option {
     margin-top: 10px;
     margin-bottom: 10px;
     padding: 10px;
+}
+
+table {
+    border: 1px black solid;
+    width: 100%;
+}
+thead {
+    border: 1px black solid;
+    background-color: #ccbd34;
+}
+th {
+    padding: 0;
+    border: 1px black solid;
+    text-align: center;
+}
+
+td {
+    font-family: --main-font-medium;
+    font-size: 14px;
+    text-align: center;
+
 }
 
 .section {

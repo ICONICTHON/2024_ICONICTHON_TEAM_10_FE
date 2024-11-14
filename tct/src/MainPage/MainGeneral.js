@@ -19,12 +19,16 @@ function MainGeneral() {
     navigate('/reservation1');
   };
 
+  const handleJoinClick = () => {
+    navigate('/Join');
+  };
+
   return (
     <div className="container_main">
       <MainHeader />
       <main className="main_button-container">
         <button className="button_main blue" onClick={handleReservationClick}>대관하기</button>
-        <button className="button_main blue">참여하기</button>
+        <button className="button_main blue" onClick={handleJoinClick}>참여하기</button>
         <button className="button_main_disabled" disabled>시작하기</button>
         <button className="button_main red" onClick={handleNextPageClick}>다음 메인페이지</button>
       </main>
