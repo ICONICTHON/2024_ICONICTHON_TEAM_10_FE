@@ -1,5 +1,5 @@
 import React from 'react';
-import './Main.css';
+import '../css/Main.css';
 import MainHeader from "./MainHeader";
 import MainGeneral from "./MainGeneral";
 import { useNavigateToNextPage } from './nextMainPage';
@@ -11,9 +11,9 @@ function MainParticipating() {
         return <MainGeneral />;
     }
     return (
-        <div className="container">
+        <div className="container_main">
         <MainHeader />
-            <main className="button-container">
+            <main className="main_button-container">
                 <button className="button_main blue">대관하기</button>
                 <button className="button_main blue">참여하기</button>
                 <button className="button_main red">퇴실하기</button>

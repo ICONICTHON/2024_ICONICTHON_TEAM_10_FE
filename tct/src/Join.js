@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import './Join.css';
 
 const rooms = [
   { id: '2158', name: '일반생물학실험실' },
@@ -71,7 +70,7 @@ function Join() {
   };
 
   return (
-    <div className="container">
+    <div className="container_main">
       <header className="header">
         <h1 className="logo">TCT</h1>
         <div className="profile-icon">👤</div>

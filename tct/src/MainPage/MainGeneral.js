@@ -1,5 +1,6 @@
 import React from 'react';
-import './Main.css';
+import '../css/Main.css';
+import '../css/layout.css';
 import MainHeader from "./MainHeader";
 import MainHostAfterStart from "./MainHostAfterStart";
 import { useNavigateToNextPage } from './nextMainPage';
@@ -12,9 +13,9 @@ function MainGeneral() {
     }
 
     return (
-        <div className="container">
+        <div className="container_main">
             <MainHeader />
-            <main className="button-container">
+            <main className="main_button-container">
                 <button className="button_main blue">대관하기</button>
                 <button className="button_main blue">참여하기</button>
                 <button className="button_main_disabled" disabled>시작하기</button>

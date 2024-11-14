@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import './ReservationInfo.css';
+import './css/fonts.css'
+import './css/layout.css'
+import MainHeader from "./MainPage/MainHeader";
 
 function ReservationInfo() {
   const [data, setData] = useState({
@@ -41,81 +43,78 @@ function ReservationInfo() {
   };
 
   return (
-    <div className="reservation-container">
-      <header className="header">
-        <h1 className="logo">TCT</h1>
-        <div className="profile-icon">👤</div>
-      </header>
-
-      <main className="main-content">
-        <h2 className="title">대관 정보</h2>
-
+    <div>
+      <MainHeader />
+      <main className="reservation-container">
+        <label className="h4Font">대관 정보</label>
         <div className="form-group">
-          <label className="full-width">
-            대관명
-            <input type="text" value={data.custom_tag} readOnly />
-          </label>
-          <div className="form-row">
-            <label>
-              건물
-              <input type="text" value={data.building_name} readOnly />
-            </label>
-            <label>
-              강의실
-              <input type="text" value={data.room_number} readOnly />
-            </label>
+          <div className="form">
+            <label className="NormalFont">대관명</label>
+            <input className="SmallFont" type="text" value={data.custom_tag} readOnly/>
           </div>
           <div className="form-row">
-            <label>
-              태그₁
-              <input type="text" value={data.tag_1} readOnly />
-            </label>
-            <label>
-              태그₂
-              <input type="text" value={data.tag_2} readOnly />
-            </label>
+            <div className="form">
+              <label className="NormalFont">건물</label>
+              <input className="SmallFont" type="text" value={data.building_name} readOnly/>
+            </div>
+            <div className="form">
+              <label className="NormalFont">강의실</label>
+              <input className="SmallFont" type="text" value={data.room_number} readOnly/>
+            </div>
+          </div>
+          <div className="form-row">
+            <div className="form">
+              <label className="NormalFont">태그1</label>
+              <input className="SmallFont" type="text" value={data.tag_1} readOnly/>
+            </div>
+            <div className="form">
+              <label className="NormalFont">태그2</label>
+              <input className="SmallFont" type="text" value={data.tag_2} readOnly/>
+            </div>
           </div>
         </div>
 
-        <button className="unlock-button" onClick={handleUnlock} disabled={isUnlocked}>
+        <button className="button_main yellow"
+                onClick={handleUnlock}
+                disabled={isUnlocked}>
           잠금해제
         </button>
 
-        {isModalOpen && (
-          <div className="modal">
-            <div className="modal-content">
-              <h2>IoT 원격 조정</h2>
-              <div className="toggle-group">
-                <label>
-                  조명
-                  <input type="checkbox" className="toggle-switch" />
-                </label>
-                <label>
-                  냉방
-                  <input type="checkbox" className="toggle-switch" />
-                </label>
-              </div>
-              <button className="next-button" onClick={closeModal}>
-                계속
-              </button>
-            </div>
-          </div>
-        )}
+        {/*{isModalOpen && (*/}
+        {/*  <div className="modal">*/}
+        {/*    <div className="modal-content">*/}
+        {/*      <h2>IoT 원격 조정</h2>*/}
+        {/*      <div className="toggle-group">*/}
+        {/*        <label>*/}
+        {/*          조명*/}
+        {/*          <input type="checkbox" className="toggle-switch" />*/}
+        {/*        </label>*/}
+        {/*        <label>*/}
+        {/*          냉방*/}
+        {/*          <input type="checkbox" className="toggle-switch" />*/}
+        {/*        </label>*/}
+        {/*      </div>*/}
+        {/*      <button className="next-button" onClick={closeModal}>*/}
+        {/*        계속*/}
+        {/*      </button>*/}
+        {/*    </div>*/}
+        {/*  </div>*/}
+        {/*)}*/}
 
-        <div className="info-section">
-          <div className="image-section">
-            <h3>사진</h3>
-            <img src="SP.jpg" alt="예약 이미지" />
+        <div className="section">
+          <div className="form">
+            <label className="h4Font">사진</label>
+            <img className="image" src="SP.jpg" alt="예약 이미지" />
           </div>
-          <div className="terms-section">
-            <h3>유의사항</h3>
-            <div className="terms-text">
-              승주는 개꼴초입니다 승주는 개꼴초입니다 승주는 개꼴초입니다 승주는 개꼴초입니다 승주는 개꼴초입니다 승주는 개꼴초입니다 승주는 개꼴초입니다 
-            </div>
+          <div className="form">
+            <label className="h4Font">유의사항</label>
+            <label className="SmallFont box">승주는 개꼴초입니다 승주는 개꼴초입니다 승주는 개꼴초입니다 승주는 개꼴초입니다 승주는 개꼴초입니다 승주는 개꼴초입니다 승주는 개꼴초입니다</label>
           </div>
         </div>
 
-        <button className="next-button">처음으로</button>
+        <button className="button_main yellow"  >
+          처음으로
+        </button>
       </main>
     </div>
   );

@@ -11,27 +11,22 @@
     font-style: normal;
 }
 
-.h1Font {
-    font-family: 'SpoqaHanSans-Bold';
-    font-size: 96px;
-}
-
-.h2Font {
-    font-family: 'SpoqaHanSans-Bold';
-    font-size: 64px;
-}
-
-.h3Font {
-    font-family: 'SpoqaHanSans-Bold';
-    font-size: 48px;
+:root {
+    --main-font-medium: 'SpoqaHanSans-Medium';
+    --main-font-bold: 'SpoqaHanSans-Bold';
 }
 
 .h4Font {
     font-family: 'SpoqaHanSans-Bold';
-    font-size: 36px;
+    font-size: 32px;
 }
 
 .NormalFont {
     font-family: 'SpoqaHanSans-Medium';
     font-size: 20px;
+}
+
+.SmallFont {
+    font-family: 'SpoqaHanSans-Medium';
+    font-size: 14px;
 }
