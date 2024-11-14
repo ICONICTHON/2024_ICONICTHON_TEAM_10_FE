@@ -113,22 +113,23 @@ function ReservationInfo() {
         </button>
       </main>
 
+      {/* Todo: 제어 버튼 선택 */}
       {showIoTModal && (
         <div className="modal-overlay">
           <div className="modal-content-big">
-            <h2>IoT 원격 조정</h2>
-            <div className="toggle-group">
-              <label>
-                조명
-                <input type="checkbox" className="toggle-switch" />
-              </label>
-              <label>
-                냉방
-                <input type="checkbox" className="toggle-switch" />
-              </label>
+            <label className="h4Font">IoT 원격 조정</label>
+            <div className="form-group top bottom">
+              <div className="form-row mid top bottom">
+                <label className="NormalFont mid-column">조명</label>
+                <img className="toggle_image" src="toggle_on.png"/>
+              </div>
+              <div className="form-row mid top bottom">
+                <label className="NormalFont mid-column">냉방</label>
+                <img className="toggle_image" src="toggle_off.png"/>
+              </div>
             </div>
-            <button className="next-button" onClick={closeIoTModal}>
-              계속
+            <button className="button_main yellow" onClick={closeIoTModal}>
+              닫기
             </button>
           </div>
         </div>
