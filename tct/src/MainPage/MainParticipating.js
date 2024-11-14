@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../css/button.css';
-import '../css/layout.css'
+import '../css/layout.css';
 import '../css/modal.css';
 import MainGeneral from "./MainGeneral";
 import MainHeader from "./MainHeader";
@@ -68,11 +68,11 @@ function MainParticipating() {
                             </div>
                             <div className="photo-box">
                                 {/*Todo: 사진 요구 */}
-                                <img className="img" src="SY.jpg" alt="예약 이미지"/>
+                                <img className="img" src="SJ_2.jpg" alt="예약 이미지"/>
                             </div>
                             <div className="photo-box">
                                 {/*Todo: 사진 요구 */}
-                                <img className="img" src="SJ2.jpg" alt="예약 이미지"/>
+                                <img className="img" src="SJ_3.jpg" alt="예약 이미지"/>
                             </div>
                         </div>
                         <div className="form-row mid">
