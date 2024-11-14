@@ -60,14 +60,20 @@ function MainParticipating() {
                         <div className="photo-grid">
                             <div className="photo-box">
                                 {/*Todo: 사진 요구 */}
-                                <img src="SP.jpg" alt="예약 이미지"/>
+                                <img className="img" src="SP.jpg" alt="예약 이미지"/>
                             </div>
                             <div className="photo-box">
                                 {/*Todo: 사진 요구 */}
-                                <img src="SJ.jpg" alt="예약 이미지"/>
+                                <img className="img" src="SJ.jpg" alt="예약 이미지"/>
                             </div>
-                            <div className="photo-box"></div>
-                            <div className="photo-box"></div>
+                            <div className="photo-box">
+                                {/*Todo: 사진 요구 */}
+                                <img className="img" src="SY.jpg" alt="예약 이미지"/>
+                            </div>
+                            <div className="photo-box">
+                                {/*Todo: 사진 요구 */}
+                                <img className="img" src="SJ2.jpg" alt="예약 이미지"/>
+                            </div>
                         </div>
                         <div className="form-row mid">
                             <button className="mini-button yellow" onClick={handleSecondModalOpen}>퇴실</button>
