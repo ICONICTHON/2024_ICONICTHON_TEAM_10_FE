@@ -1,11 +1,25 @@
-// Reservation2.js
-import React, { useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
 import './Reservation2.css';
 
 function Reservation2() {
-  const { state } = useLocation(); // Reservation1에서 전달된 데이터
+  const [reservationData, setReservationData] = useState(null);
   const [isChecked, setIsChecked] = useState(false);
+
+  useEffect(() => {
+    fetchReservationData();
+  }, []);
+
+  const fetchReservationData = () => {
+    fetch('http://localhost:8000/api/get_latest_reservation/', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then(response => response.json())
+      .then(data => setReservationData(data))
+      .catch(error => console.error('Error:', error));
+  };
 
   const handleCheckboxChange = () => setIsChecked(!isChecked);
 
@@ -17,12 +31,23 @@ function Reservation2() {
       </header>
 
       <h2 className="title">요약정보</h2>
-      <p>{state.building_name} {state.room_id}</p>
-      <p>{state.reservation_date} {state.start_time} - {state.end_time}</p>
+      {reservationData ? (
+        <>
+          <p>건물명: {reservationData.building_name}</p>
+          <p>강의실 ID: {reservationData.room_id}</p>
+          <p>예약 날짜: {reservationData.reservation_date}</p>
+          <p>예약 시간: {reservationData.start_time} - {reservationData.end_time}</p>
+          <p>대관명: {reservationData.custom_tag}</p>
+          <p>태그1: {reservationData.tag_1}</p>
+          <p>태그2: {reservationData.tag_2}</p>
+        </>
+      ) : (
+        <p>로딩 중...</p>
+      )}
 
       <h3 className="subtitle">유의사항</h3>
       <div className="notice-box">
-        <p>승주는 개꿀초입니다... (유의사항 텍스트를 여기에 표시)</p>
+        <p>유의사항을 잘 읽고 동의해주세요. (여기에 유의사항 텍스트 표시)</p>
       </div>
 
       <label className="checkbox-container">
