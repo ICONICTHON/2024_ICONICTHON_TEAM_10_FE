@@ -111,8 +111,6 @@ function ReservationInfo() {
 
         <div className="section">
           <div className="form">
-            <label className="h4Font">사진</label>
-            <img className="image" src="SP.jpg" alt="예약 이미지" />
           </div>
           <div className="form">
             <label className="h4Font">유의사항</label> 
