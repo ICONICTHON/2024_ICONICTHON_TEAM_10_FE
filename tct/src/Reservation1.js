@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-// import './Reservation1.css';
+import './Reservation1.css';
 import Header from "./MainPage/MainHeader";
 import './css/layout.css';
 import './css/fonts.css';
@@ -20,6 +20,14 @@ function Reservation1() {
 
   const handleDateChange = (event) => {
     setSelectedDate(event.target.value);
+  };
+
+  const handleTag1Select = (tag) => {
+    setTag1(tag);
+  };
+
+  const handleTag2Select = (tag) => {
+    setTag2(tag);
   };
 
   const handleTimeSelect = (time) => {
@@ -125,6 +133,7 @@ function Reservation1() {
     <div className="reservation-container">
       <Header />
       <label className="h4Font">대관하기</label>
+      
       <div className="form-group">
         <div className="form">
           <label className="NormalFont">건물</label>
@@ -166,38 +175,51 @@ function Reservation1() {
         </div>
       </div>
 
-
+      <div className="group">
       <div className="form-group">
         <label className="NormalFont">대관명</label>
-        <input
-            type="text"
-            placeholder="여기에 입력하세요"
-            value={custum_tag}
-            onChange={(e) => setCustomTag(e.target.value)}
-        />
-      </div>
-
-      <div className="form-row left">
-        <div className="form">
-          <label className="NormalFont">태그1</label>
-          <select value={tag_1} onChange={(e) => setTag1(e.target.value)}>
-            <option value="">선택</option>
-            <option value="회의">회의</option>
-            <option value="공부">공부</option>
-            <option value="강의">강의</option>
-            <option value="시험">시험</option>
-          </select>
-        </div>
-
-        <div className="form">
-          <label className="NormalFont">태그2</label>
-          <select value={tag_2} onChange={(e) => setTag2(e.target.value)}>
-            <option value="">선택</option>
-            <option value="잡담 가능">잡담 가능</option>
-            <option value="정숙">정숙</option>
-          </select>
+          <div className="tag-options">
+            <input
+              type="text"
+              placeholder="여기에 입력하세요"
+              value={custum_tag}
+              onChange={(e) => setCustomTag(e.target.value)}
+            />
         </div>
       </div>
+
+      <div className="form-group">
+        <label className="NormalFont">목적</label>
+        <div className="tag-options">
+          {["회의", "공부", "강의", "시험"].map(tag => (
+            <button
+              key={tag}
+              className={tag_1 === tag ? 'tag-button selected' : 'tag-button'}
+              onClick={() => handleTag1Select(tag)}
+            >
+              {tag}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      <div className="form-group">
+        <label className="NormalFont">분위기</label>
+        <div className="tag-options">
+          {["잡담 가능", "정숙"].map(tag => (
+            <button
+              key={tag}
+              className={tag_2 === tag ? 'tag-button selected' : 'tag-button'}
+              onClick={() => handleTag2Select(tag)}
+            >
+              {tag}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      </div>
+
 
       <button className="mini-button yellow" onClick={handleSubmit}>다음</button>
     </div>

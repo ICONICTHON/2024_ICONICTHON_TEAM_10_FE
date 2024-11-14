@@ -63,11 +63,11 @@ header {
 }
 
 .time-options button.selected {
-  background-color: #4CAF50;
+  background-color: #000000;
   color: white;
 }
 
-.reservation-details input {
+.reservation-details input {  
   width: 100%;
   padding: 10px;
   font-size: 16px;
@@ -89,4 +89,28 @@ header {
 
 .next-button:hover {
   background-color: #ffe082;
+}
+
+.tag-button {
+  padding: 10px 20px;
+  border: 1px solid #333;
+  border-radius: 8px;
+  background-color: white;
+  color: black;
+  margin: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.tag-button.selected {
+  background-color: #333;
+  color: white;
+}
+
+.tag-options{
+  margin-bottom: 20px;
+}
+
+.group {
+  margin-left: -50px;
 }
