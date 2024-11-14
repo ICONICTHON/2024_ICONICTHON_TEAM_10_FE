@@ -12,66 +12,128 @@ function Reservation1() {
   const [customTag, setCustomTag] = useState('');
   const [tag1, setTag1] = useState('');
   const [tag2, setTag2] = useState('');
+  const [timeSlots, setTimeSlots] = useState([]);
   const navigate = useNavigate();
   
   const handleRoomChange = (event) => {
     setSelectedRoom(event.target.value);
   };
 
-  const handleDateChange = (event) => {
+  const handleDateChange = async (event) => {
+    const date = new Date(event.target.value);
+    const dayNumber = date.getDay();
+    const adjustedDayNumber = (dayNumber + 6) % 7;
+    
     setSelectedDate(event.target.value);
+
+    const requestData = {
+      room_number: selectedRoom,
+      day_of_week: adjustedDayNumber.toString(),
+      buliding_name: "신공학관"
+    };
+
+    try {
+      const response = await fetch('http://127.0.0.1:8000/api/timetable/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(requestData)
+      });
+
+      const data = await response.json();
+      console.log('서버 응답:', data);
+      
+      if (data.status === "success") {
+        const filteredTimeSlots = data.time_slots.slice(6);
+        setTimeSlots(filteredTimeSlots);
+        console.log('필터링된 시간대별 예약 현황:', filteredTimeSlots);
+      }
+      
+    } catch (error) {
+      console.error('Error:', error);
+    }
   };
 
   const handleTimeSelect = (time) => {
     setSelectedTime(time);
-    sendReservationData(time);
   };
 
-  const sendReservationData = (time) => {
-    const reservationData = {
+  const handleSubmit = async () => {
+    // 필수 필드 검증
+    if (!selectedRoom || !selectedDate || !selectedTime) {
+        console.error('필수 정보가 누락되었습니다:', {
+            room: selectedRoom,
+            date: selectedDate,
+            time: selectedTime
+        });
+        return;
+    }
+
+    const [hours, minutes] = selectedTime.split(':');
+    const reservationDateTime = new Date(selectedDate);
+    reservationDateTime.setHours(parseInt(hours), parseInt(minutes), 0, 0);
+    
+    const initialReservationData = {
         building_name: '신공학관',
         room_id: selectedRoom,
-        reservation_date: `${selectedDate} ${time}`,
+        reservation_date: reservationDateTime.toISOString()
     };
 
-    console.log('전송할 데이터:', JSON.stringify(reservationData));
-    fetch('http://localhost:8000/api/select_classroom', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(reservationData),
-    })
-    .then(response => response.json())
-    .then(data => console.log(data))
-    .catch(error => console.error('Error:', error));
-  };
+    console.log('서버로 보내는 데이터:', initialReservationData); // 데이터 확인
 
-  const handleSubmit = () => {
-    const reservationData = {
-      building_name: '신공학관',
-      room_id: selectedRoom,
-      reservation_date: selectedDate,
-      start_time: selectedTime,
-      custom_tag: customTag,
-      tag1: tag1,
-      tag2: tag2,
-    };
+    try {
+        const response1 = await fetch('http://127.0.0.1:8000/api/select_classroom/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(initialReservationData)
+        });
 
-    console.log('전송할 데이터:', JSON.stringify(reservationData));
-    fetch('http://localhost:8000/api/select_classroom_1/', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(reservationData),
-    })
-    .then(response => response.json())
-    .then(data => {
-      console.log(data);
-      navigate('/reservation-summary', {state: data});
-    })
-    .catch(error => console.error('Error:', error));
+        if (!response1.ok) {
+            throw new Error(`HTTP error! status: ${response1.status}`);
+        }
+
+        const data1 = await response1.json();
+        console.log('첫 번째 API 응답:', data1);
+        
+        if (data1.error) {
+            console.error('첫 번째 API 에러:', data1.error);
+            return;
+        }
+
+        const finalReservationData = {
+            building_name: '신공학관',
+            room_id: selectedRoom,
+            reservation_date: selectedDate,
+            start_time: selectedTime,
+            custom_tag: customTag,
+            tag1: tag1,
+            tag2: tag2,
+        };
+
+        console.log('두 번째 API 데이터:', finalReservationData); // 데이터 확인
+
+        const response2 = await fetch('http://localhost:8000/api/select_classroom_2/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(finalReservationData)
+        });
+
+        if (!response2.ok) {
+            throw new Error(`HTTP error! status: ${response2.status}`);
+        }
+
+        const data2 = await response2.json();
+        console.log('최종 응답:', data2);
+        navigate('/reservation-summary', {state: data2});
+
+    } catch (error) {
+        console.error('Error:', error);
+    }
   };
 
   const rooms = [
@@ -142,17 +204,29 @@ function Reservation1() {
 
         <div className="form">
           <label className="NormalFont">날짜</label>
-          <input className="SmallFont" type="date" value={selectedDate} onChange={handleDateChange}/>
+          <input 
+            className="SmallFont" 
+            type="date" 
+            value={selectedDate} 
+            onChange={(e) => {
+              console.log(2);
+              handleDateChange(e);
+            }}
+          />
         </div>
 
         <div className="form">
           <label className="NormalFont">시간</label>
           <div className="time-options">
-            {times.map((time) => (
+            {times.map((time, index) => (
                 <button
                     key={time}
-                    className={selectedTime === time ? 'selected' : ''}
+                    className={`
+                      ${selectedTime === time ? 'selected' : ''}
+                      ${timeSlots[index] === 1 ? 'unavailable' : ''}
+                    `}
                     onClick={() => handleTimeSelect(time)}
+                    disabled={timeSlots[index] === 1}
                 >
                   {time}
                 </button>
