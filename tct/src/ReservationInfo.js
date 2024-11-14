@@ -133,20 +133,21 @@ function ReservationInfo() {
               <button onClick={openCamera}>사진 찍기</button>
             )}
             {isCameraOpen && (
-              <div className="webcam-container">
-                <Webcam
-                  audio={false}
-                  ref={webcamRef}
-                  screenshotFormat="image/jpeg"
-                  videoConstraints={videoConstraints}
-                  onUserMediaError={(error) => {
-                    console.error('Webcam error:', error);
-                    setIsCameraOpen(false);
-                  }}
-                />
-                <button onClick={capturePhoto}>캡처</button>
-              </div>
-            )}
+  <div className="webcam-container">
+    <Webcam
+      audio={false}
+      ref={webcamRef}
+      screenshotFormat="image/jpeg"
+      videoConstraints={videoConstraints}
+      onUserMediaError={(error) => {
+        console.error('Webcam error:', error);
+        setIsCameraOpen(false);
+      }}
+      style={{ width: '100%', height: 'auto', maxWidth: '400px' }} // 인라인 스타일 추가
+    />
+    <button onClick={capturePhoto}>캡처</button>
+  </div>
+)}
           </div>
           <div className="form">
             <label className="h4Font">유의사항</label> 
