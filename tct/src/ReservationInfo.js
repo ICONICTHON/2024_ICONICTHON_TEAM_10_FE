@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import Webcam from 'react-webcam';
+import './css/button.css';
 import './css/fonts.css';
 import './css/layout.css';
 import './css/modal.css'; // 모달 스타일 추가
@@ -130,7 +131,13 @@ function ReservationInfo() {
             {capturedImage ? (
               <img className="image" src={capturedImage} alt="Captured" />
             ) : (
-              <button onClick={openCamera}>사진 찍기</button>
+              <button
+  className="button_main blue mini-button"
+  onClick={openCamera}
+  style={{ marginBottom: '10px' }} // 인라인 스타일로 마진 추가
+>
+  사진 찍기
+</button>
             )}
             {isCameraOpen && (
   <div className="webcam-container">
@@ -145,7 +152,7 @@ function ReservationInfo() {
       }}
       style={{ width: '100%', height: 'auto', maxWidth: '400px' }} // 인라인 스타일 추가
     />
-    <button onClick={capturePhoto}>캡처</button>
+    <button className="button_main red" onClick={capturePhoto}>캡처</button>
   </div>
 )}
           </div>
