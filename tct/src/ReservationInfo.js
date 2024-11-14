@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+import Webcam from 'react-webcam';
 import './css/fonts.css';
 import './css/layout.css';
 import './css/modal.css'; // 모달 스타일 추가
@@ -6,19 +7,21 @@ import IoTControlModal from './IoTControlModal'; // IoTControlModal 컴포넌트
 import MainHeader from "./MainPage/MainHeader";
 
 function ReservationInfo() {
-  const [data, setData] = useState(null);  // 초기 상태를 null로 설정
+  const [data, setData] = useState(null);
   const [isUnlocked, setIsUnlocked] = useState(false);
   const [showUnlockModal, setShowUnlockModal] = useState(false);
-  const [showIoTModal, setShowIoTModal] = useState(false); // IoT 모달 상태 관리
+  const [showIoTModal, setShowIoTModal] = useState(false);
+  const [isCameraOpen, setIsCameraOpen] = useState(false);
+  const [capturedImage, setCapturedImage] = useState(null);
+  const webcamRef = useRef(null);
 
   // 서버에서 데이터 가져오기
   useEffect(() => {
     fetch('http://localhost:8000/api/start/', {
-      method: 'GET',  // GET 방식으로 설정
+      method: 'GET',
       headers: {
         'Content-Type': 'application/json',
       },
-      // body를 제거합니다.
     })
       .then(response => response.json())
       .then(data => {
@@ -37,25 +40,37 @@ function ReservationInfo() {
       .catch(error => console.error('Error fetching data:', error));
   }, []);
 
-  // 잠금 해제 버튼 클릭 시 호출되는 함수
   const handleUnlock = () => {
     setIsUnlocked(true);
     setShowUnlockModal(true);
   };
 
-  // 잠금 해제 모달 닫기
   const closeUnlockModal = () => {
     setShowUnlockModal(false);
   };
 
-  // 다음으로 버튼 클릭 시 IoT 모달 표시
   const handleNext = () => {
     setShowIoTModal(true);
   };
 
-  // IoT 모달 닫기
   const closeIoTModal = () => {
     setShowIoTModal(false);
+  };
+
+  const openCamera = () => {
+    setIsCameraOpen(true);
+  };
+
+  const capturePhoto = () => {
+    const imageSrc = webcamRef.current.getScreenshot();
+    setCapturedImage(imageSrc);
+    setIsCameraOpen(false);
+  };
+
+  const videoConstraints = {
+    width: 1280,
+    height: 720,
+    facingMode: "user"
   };
 
   return (
@@ -111,15 +126,37 @@ function ReservationInfo() {
 
         <div className="section">
           <div className="form">
+            <label className="h4Font">사진</label>
+            {capturedImage ? (
+              <img className="image" src={capturedImage} alt="Captured" />
+            ) : (
+              <button onClick={openCamera}>사진 찍기</button>
+            )}
+            {isCameraOpen && (
+              <div className="webcam-container">
+                <Webcam
+                  audio={false}
+                  ref={webcamRef}
+                  screenshotFormat="image/jpeg"
+                  videoConstraints={videoConstraints}
+                  onUserMediaError={(error) => {
+                    console.error('Webcam error:', error);
+                    setIsCameraOpen(false);
+                  }}
+                />
+                <button onClick={capturePhoto}>캡처</button>
+              </div>
+            )}
           </div>
           <div className="form">
             <label className="h4Font">유의사항</label> 
-            <label className="SmallFont box"> &nbsp;  - 이용시간 08:00-22:00 (1회 4시간 제한)
-              <br></br> &nbsp; - 학생수업/실습/연구에 지장이 없는 경우만 승인
-              <br></br> &nbsp; - 소음 발생 행사는 학림관 소강당만 가능
-              <br></br> &nbsp; - 승인 후에도 학교 공식행사 발생 시 취소될 수 있음
-              <br></br> &nbsp; - 대여 전후 강의실 상태 확인을 위한 사진 촬영 필수
-              </label>
+            <label className="SmallFont box">
+              &nbsp;  - 이용시간 08:00-22:00 (1회 4시간 제한)
+              <br /> &nbsp; - 학생수업/실습/연구에 지장이 없는 경우만 승인
+              <br /> &nbsp; - 소음 발생 행사는 학림관 소강당만 가능
+              <br /> &nbsp; - 승인 후에도 학교 공식행사 발생 시 취소될 수 있음
+              <br /> &nbsp; - 대여 전후 강의실 상태 확인을 위한 사진 촬영 필수
+            </label>
           </div>
         </div>
 
