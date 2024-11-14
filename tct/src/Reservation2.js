@@ -67,12 +67,16 @@ function Reservation2() {
 
       <h3 className="subtitle">유의사항</h3>
       <div className="notice-box">
-        <p>유의사항을 잘 읽고 동의해주세요. (여기에 유의사항 텍스트 표시)</p>
+      &nbsp;  - 이용시간 08:00-22:00 (1회 4시간 제한)
+              <br></br> &nbsp; - 학생수업/실습/연구에 지장이 없는 경우만 승인
+              <br></br> &nbsp; - 소음 발생 행사는 학림관 소강당만 가능
+              <br></br> &nbsp; - 승인 후에도 학교 공식행사 발생 시 취소될 수 있음
+              <br></br> &nbsp; - 대여 전후 강의실 상태 확인을 위한 사진 촬영 필수
       </div>
 
       <label className="checkbox-container">
-        위 내용에 동의합니다
         <input type="checkbox" checked={isChecked} onChange={handleCheckboxChange} />
+        위 내용에 동의합니다
       </label>
 
       <button

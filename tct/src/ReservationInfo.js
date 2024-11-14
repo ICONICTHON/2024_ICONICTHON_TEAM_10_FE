@@ -109,8 +109,13 @@ function ReservationInfo() {
             <img className="image" src="SP.jpg" alt="예약 이미지" />
           </div>
           <div className="form">
-            <label className="h4Font">유의사항</label>
-            <label className="SmallFont box">승주는 개꼴초입니다 승주는 개꼴초입니다 승주는 개꼴초입니다 승주는 개꼴초입니다 승주는 개꼴초입니다 승주는 개꼴초입니다 승주는 개꼴초입니다</label>
+            <label className="h4Font">유의사항</label> 
+            <label className="SmallFont box"> &nbsp;  - 이용시간 08:00-22:00 (1회 4시간 제한)
+              <br></br> &nbsp; - 학생수업/실습/연구에 지장이 없는 경우만 승인
+              <br></br> &nbsp; - 소음 발생 행사는 학림관 소강당만 가능
+              <br></br> &nbsp; - 승인 후에도 학교 공식행사 발생 시 취소될 수 있음
+              <br></br> &nbsp; - 대여 전후 강의실 상태 확인을 위한 사진 촬영 필수
+              </label>
           </div>
         </div>
 
