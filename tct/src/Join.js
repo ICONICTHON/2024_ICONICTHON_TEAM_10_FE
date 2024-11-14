@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Header from "./MainPage/MainHeader";
-
+import './css/button.css'
 const rooms = [
   { id: '2158', name: '일반생물학실험실' },
   { id: '2166', name: '강의실' },
@@ -108,9 +108,9 @@ function Join() {
               <select value={selectedRoom} onChange={(e) => setSelectedRoom(e.target.value)}>
                 <option value="">선택하세요</option>
                 {rooms.map((room) => (
-                  <option key={room.id} value={room.id}>
-                    {room.name}
-                  </option>
+                    <option key={room.id} value={room.id}>
+                      {room.name}
+                    </option>
                 ))}
               </select>
             </div>
@@ -121,9 +121,9 @@ function Join() {
               <select value={selectedTag1} onChange={(e) => setSelectedTag1(e.target.value)}>
                 <option value="">선택하세요</option>
                 {tags1.map((tag, index) => (
-                  <option key={index} value={tag}>
-                    {tag}
-                  </option>
+                    <option key={index} value={tag}>
+                      {tag}
+                    </option>
                 ))}
               </select>
             </div>
@@ -132,9 +132,9 @@ function Join() {
               <select value={selectedTag2} onChange={(e) => setSelectedTag2(e.target.value)}>
                 <option value="">선택하세요</option>
                 {tags2.map((tag, index) => (
-                  <option key={index} value={tag}>
-                    {tag}
-                  </option>
+                    <option key={index} value={tag}>
+                      {tag}
+                    </option>
                 ))}
               </select>
             </div>
@@ -147,35 +147,34 @@ function Join() {
 
         <button className="mini-button yellow" onClick={handleSearch}>검색</button>
 
+        <label className="h4Font top">목록</label>
         <div className="reservation-container top bottom">
-          <label className="h4Font">목록</label>
           <table className="data-table">
             <thead>
-              <tr>
-                <th>건물</th>
-                <th>강의실</th>
-                <th>대관명</th>
-                <th>시간</th>
-                <th>참여</th>
-              </tr>
+            <tr>
+              <th>건물</th>
+              <th>강의실</th>
+              <th>대관명</th>
+              <th>시간</th>
+            </tr>
             </thead>
             <tbody>
-              {reservationList.map((reservation, index) => (
+            {reservationList.map((reservation, index) => (
                 <tr key={index}>
                   <td>{reservation.building}</td>
                   <td>{reservation.room}</td>
                   <td>{reservation.name}</td>
-                  <td>{reservation.time}</td>
-                  <td>
+
+                  <td>{reservation.time}
                     <button
-                      className="mini-button yellow"
-                      onClick={() => handleOpenModal(reservation)}
+                        className="yellow SmallFont"
+                        onClick={() => handleOpenModal(reservation)}
                     >
                       참여
                     </button>
                   </td>
                 </tr>
-              ))}
+            ))}
             </tbody>
           </table>
         </div>
@@ -185,34 +184,30 @@ function Join() {
       {isModalOpen && selectedReservation && (
         <div className="modal-overlay" onClick={handleCloseModal}>
           <div className="modal-content-big" onClick={(e) => e.stopPropagation()}>
-            <h2>선택 정보</h2>
-            <p>
+            <label className="h4Font">선택 정보</label>
+            <p className="NormalFont bottom">
               {selectedReservation.building} {selectedReservation.room} {selectedReservation.name}
             </p>
             <div>
-              <strong>유의사항</strong>
-              <div style={{
-                border: '1px solid #ddd',
-                padding: '10px',
-                marginTop: '5px',
-                overflowY: 'auto',
-                maxHeight: '100px'
-              }}>
+              <label className="h4Font">유의사항</label>
+              <div className="caution">
                 {selectedReservation.notice}
               </div>
             </div>
-            <div className="modal-footer">
-              <div className="checkbox">
+            <div className="form mid">
+              <div className="form-row mid">
+                <label className="NormalFont" htmlFor="agree">위 내용에 동의합니다</label>
                 <input type="checkbox" id="agree" checked={isChecked} onChange={handleCheckboxChange}/>
-                <label htmlFor="agree" style={{marginLeft: '5px'}}>위 내용에 동의합니다</label>
               </div>
-              <button
-                className={`modal-button ${isChecked ? '' : 'disabled'}`}
-                disabled={!isChecked}
-                onClick={handleParticipation}
-              >
+              <div className="mid top">
+                <button
+                    className={`mini-button yellow modal-button ${isChecked ? '' : 'disabled'}`}
+                    disabled={!isChecked}
+                    onClick={handleParticipation}
+                >
                 참여
-              </button>
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -220,10 +215,12 @@ function Join() {
 
       {/* 참여 완료 모달 */}
       {isNotificationOpen && (
-        <div className="modal-overlay" onClick={closeNotification}>
+          <div className="modal-overlay" onClick={closeNotification}>
           <div className="modal-content-small" onClick={(e) => e.stopPropagation()}>
-            <p>참여되었습니다</p>
-            <button className="modal-button" onClick={closeNotification}>확인</button>
+            <label className="NormalFont bottom">참여되었습니다</label>
+            <div className="mid">
+              <button className="mini-button" onClick={closeNotification}>확인</button>
+            </div>
           </div>
         </div>
       )}
