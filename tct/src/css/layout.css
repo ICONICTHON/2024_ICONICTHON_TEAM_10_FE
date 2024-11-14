@@ -28,15 +28,21 @@
     overflow-y: auto;
 }
 
+{/* small section 배치용 */}
 .form-group {
     display: flex;
     flex-direction: column;
     width: 100%;
 }
+
 .form-row {
     display: flex;
     flex-direction: row;
     gap: 10px;
+}
+
+.mid {
+    justify-content: center;
 }
 
 .form {
@@ -56,7 +62,7 @@ input {
     box-sizing: border-box;
 }
 
-.section{
+.section {
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -65,8 +71,6 @@ input {
 }
 
 .image {
-    width: 300px;
-    height: 300px;
     object-fit: scale-down;
     border-radius: 8px;
 }
@@ -77,4 +81,21 @@ input {
     padding: 5px;
     margin-top: 10px;
     margin-bottom: 10px;
+}
+
+{/* 사진 관련 css */}
+.photo-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.photo-box {
+    min-width: 100px;
+    min-height: 100px;
+    object-fit: scale-down;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
 }

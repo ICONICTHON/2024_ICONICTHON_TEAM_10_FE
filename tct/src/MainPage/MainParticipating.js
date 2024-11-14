@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import '../css/Main.css';
+import '../css/layout.css'
+import '../css/modal.css';
 import MainGeneral from "./MainGeneral";
 import MainHeader from "./MainHeader";
 import { useNavigateToNextPage } from './nextMainPage';
@@ -33,33 +35,44 @@ function MainParticipating() {
                 <button className="button_main red" onClick={handleNextPageClick}>다음 메인페이지</button>
             </main>
 
-            {/* 첫 번째 모달 */}
+            {/* 퇴실 시 사진 요구 */}
             {isFirstModalOpen && (
                 <div className="modal-overlay">
-                    <div className="modal-content">
-                        <h2>사진</h2>
+                    <div className="modal-content-big">
+                        <label className="h4Font">사진</label>
+                        <label className="NormalFont">
+                            강의실 전체가
+                        </label>
+                        <label className="NormalFont">
+                            잘 보이게 촬영해주세요!
+                        </label>
+
                         <div className="photo-grid">
                             <div className="photo-box">
-                                <img src="SP.jpg" alt="예약 이미지" />
-                            </div>  
+                                {/*Todo: 사진 요구 */}
+                                <img src="SP.jpg" alt="예약 이미지"/>
+                            </div>
                             <div className="photo-box">
-                                <img src="SJ.jpg" alt="예약 이미지" />
+                                {/*Todo: 사진 요구 */}
+                                <img src="SJ.jpg" alt="예약 이미지"/>
                             </div>
                             <div className="photo-box"></div>
                             <div className="photo-box"></div>
                         </div>
-                        <button className="button_modal_disabled" onClick={handleSecondModalOpen}>퇴실</button>
-                        <button className="modal-close" onClick={handleFirstModalClose}>닫기</button>
+                        <div className="form-row mid">
+                            <button className="mini-button yellow" onClick={handleSecondModalOpen}>퇴실</button>
+                            <button className="mini-button red" onClick={handleFirstModalClose}>닫기</button>
+                        </div>
                     </div>
                 </div>
             )}
 
-            {/* 두 번째 모달 */}
+            {/* 퇴실 완료 */}
             {isSecondModalOpen && (
                 <div className="modal-overlay">
-                    <div className="modal-content">
-                        <h2>퇴실되었습니다</h2>
-                        <button className="modal-confirm" onClick={handleSecondModalClose}>확인</button>
+                    <div className="modal-content-small">
+                        <label className="h4Font">퇴실되었습니다</label>
+                        <button className="modal-close NormalFont" onClick={handleSecondModalClose}>확인</button>
                     </div>
                 </div>
             )}

@@ -159,9 +159,9 @@ function Join() {
           <div className="overlay" onClick={handleCloseModal}></div>
           <div className="modal">
             <div className="modal-header">선택 정보</div>
-            <div className="modal-content">
+            <div className="modal-content-big">
               <p>신공학관 6119 컴공모여라</p>
-              <div className="modal-content">
+              <div className="modal-content-big">
                 <strong>유의사항</strong>
                 <div style={{ border: '1px solid #ddd', padding: '10px', marginTop: '5px', overflowY: 'auto', maxHeight: '100px' }}>
                   승주는 개꿀초입니다 승주는 개꿀초입니다...
