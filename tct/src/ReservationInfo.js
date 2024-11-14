@@ -16,6 +16,10 @@ function ReservationInfo() {
   const [isUnlocked, setIsUnlocked] = useState(false);
   const [showUnlockModal, setShowUnlockModal] = useState(false);
   const [showIoTModal, setShowIoTModal] = useState(false);
+  
+  // Add state variables for toggles
+  const [isLightOn, setIsLightOn] = useState(true);
+  const [isAirConOn, setIsAirConOn] = useState(false);
 
   // 서버 연동 시 데이터 가져오기
   useEffect(() => {
@@ -121,11 +125,19 @@ function ReservationInfo() {
             <div className="form-group top bottom">
               <div className="form-row mid top bottom">
                 <label className="NormalFont mid-column">조명</label>
-                <img className="toggle_image" src="toggle_on.png"/>
+                <img
+                  className="toggle_image"
+                  src={isLightOn ? "toggle_on.png" : "toggle_off.png"}
+                  onClick={() => setIsLightOn(!isLightOn)}
+                />
               </div>
               <div className="form-row mid top bottom">
                 <label className="NormalFont mid-column">냉방</label>
-                <img className="toggle_image" src="toggle_off.png"/>
+                <img
+                  className="toggle_image"
+                  src={isAirConOn ? "toggle_on.png" : "toggle_off.png"}
+                  onClick={() => setIsAirConOn(!isAirConOn)}
+                />
               </div>
             </div>
             <button className="button_main yellow" onClick={closeIoTModal}>
