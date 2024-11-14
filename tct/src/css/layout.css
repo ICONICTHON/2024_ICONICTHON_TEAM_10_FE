@@ -127,11 +127,11 @@ td {
 
 /* 유의사항 칸 */
 .caution {
-    border: 1px solid #ddd;
-    padding: 10px;
-    margin-top: 5px;
-    overflow-y: auto;
-    max-height: 100px;
+    border: 1px solid #ddd; /* 기존 테두리 유지 */
+    padding: 10px; /* 기존 여백 유지 */
+    margin-top: 5px; /* 기존 위쪽 여백 유지 */
+    overflow-y: visible; /* 스크롤 제거 */
+    max-height: none; /* 높이 제한 제거 */
 }
 /* 사진 관련 css */
 .photo-grid {

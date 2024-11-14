@@ -192,8 +192,8 @@ function Join() {
               <label className="h4Font">유의사항</label>
               <div className="caution">
                 {selectedReservation.notice}
-              </div>
-            </div>
+              
+            
             <div className="form mid">
               <div className="form-row mid">
                 <label className="NormalFont" htmlFor="agree">
@@ -203,16 +203,23 @@ function Join() {
                   <br></br> &nbsp; - 승인 후에도 학교 공식행사 발생 시 취소될 수 있음
                   <br></br> &nbsp; - 대여 전후 강의실 상태 확인을 위한 사진 촬영 필수
                 </label>
-                <input type="checkbox" id="agree" checked={isChecked} onChange={handleCheckboxChange}/>
+                </div>
               </div>
+              </div>
+              <div className="form-row mid" style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end' }}>
+  <label htmlFor="agree" style={{ marginRight: '8px' }}>위 내용에 동의합니다</label>
+  <input type="checkbox" id="agree" checked={isChecked} onChange={handleCheckboxChange} />
+</div>
+
+
               <div className="mid top">
-                <button
-                    className={`mini-button yellow modal-button ${isChecked ? '' : 'disabled'}`}
-                    disabled={!isChecked}
-                    onClick={handleParticipation}
-                >
-                참여
-                </button>
+              <button
+  className={`mini-button ${isChecked ? 'yellow' : 'button_main_disabled'}`}
+  disabled={!isChecked}
+  onClick={handleParticipation}
+>
+  참여
+</button>
               </div>
             </div>
           </div>
@@ -225,7 +232,7 @@ function Join() {
           <div className="modal-content-small" onClick={(e) => e.stopPropagation()}>
             <label className="NormalFont bottom">참여되었습니다</label>
             <div className="mid">
-              <button className="mini-button" onClick={closeNotification}>확인</button>
+              <button className="mini-button yellow" onClick={closeNotification}>확인</button>
             </div>
           </div>
         </div>
