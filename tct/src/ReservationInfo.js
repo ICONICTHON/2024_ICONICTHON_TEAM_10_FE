@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import './css/fonts.css'
-import './css/layout.css'
+import './css/fonts.css';
+import './css/layout.css';
+import './css/modal.css'; // 모달 스타일 추가
 import MainHeader from "./MainPage/MainHeader";
 
 function ReservationInfo() {
@@ -13,7 +14,8 @@ function ReservationInfo() {
   });
 
   const [isUnlocked, setIsUnlocked] = useState(false);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [showUnlockModal, setShowUnlockModal] = useState(false);
+  const [showIoTModal, setShowIoTModal] = useState(false);
 
   // 서버 연동 시 데이터 가져오기
   useEffect(() => {
@@ -35,11 +37,19 @@ function ReservationInfo() {
 
   const handleUnlock = () => {
     setIsUnlocked(true);
-    setIsModalOpen(true); // 모달 창 열기
+    setShowUnlockModal(true);
   };
 
-  const closeModal = () => {
-    setIsModalOpen(false);
+  const closeUnlockModal = () => {
+    setShowUnlockModal(false);
+  };
+
+  const handleNext = () => {
+    setShowIoTModal(true);
+  };
+
+  const closeIoTModal = () => {
+    setShowIoTModal(false);
   };
 
   return (
@@ -74,32 +84,18 @@ function ReservationInfo() {
           </div>
         </div>
 
-        <button className="button_main yellow"
-                onClick={handleUnlock}
-                disabled={isUnlocked}>
+        <button className="button_main yellow" onClick={handleUnlock} disabled={isUnlocked}>
           잠금해제
         </button>
 
-        {/*{isModalOpen && (*/}
-        {/*  <div className="modal">*/}
-        {/*    <div className="modal-content">*/}
-        {/*      <h2>IoT 원격 조정</h2>*/}
-        {/*      <div className="toggle-group">*/}
-        {/*        <label>*/}
-        {/*          조명*/}
-        {/*          <input type="checkbox" className="toggle-switch" />*/}
-        {/*        </label>*/}
-        {/*        <label>*/}
-        {/*          냉방*/}
-        {/*          <input type="checkbox" className="toggle-switch" />*/}
-        {/*        </label>*/}
-        {/*      </div>*/}
-        {/*      <button className="next-button" onClick={closeModal}>*/}
-        {/*        계속*/}
-        {/*      </button>*/}
-        {/*    </div>*/}
-        {/*  </div>*/}
-        {/*)}*/}
+        {showUnlockModal && (
+          <div className="modal-overlay">
+            <div className="modal-content-small">
+              <h2>잠금해제되었습니다!</h2>
+              <button className="modal-close" onClick={closeUnlockModal}>닫기</button>
+            </div>
+          </div>
+        )}
 
         <div className="section">
           <div className="form">
@@ -112,10 +108,31 @@ function ReservationInfo() {
           </div>
         </div>
 
-        <button className="button_main yellow"  >
-          처음으로
+        <button className="button_main yellow" onClick={handleNext}>
+          다음으로 
         </button>
       </main>
+
+      {showIoTModal && (
+        <div className="modal-overlay">
+          <div className="modal-content-big">
+            <h2>IoT 원격 조정</h2>
+            <div className="toggle-group">
+              <label>
+                조명
+                <input type="checkbox" className="toggle-switch" />
+              </label>
+              <label>
+                냉방
+                <input type="checkbox" className="toggle-switch" />
+              </label>
+            </div>
+            <button className="next-button" onClick={closeIoTModal}>
+              계속
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
