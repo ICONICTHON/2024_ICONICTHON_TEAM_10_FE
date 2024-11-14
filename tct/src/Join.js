@@ -108,9 +108,9 @@ function Join() {
               <select value={selectedRoom} onChange={(e) => setSelectedRoom(e.target.value)}>
                 <option value="">선택하세요</option>
                 {rooms.map((room) => (
-                  <option key={room.id} value={room.id}>
-                    {room.name}
-                  </option>
+                <option key={room.id} value={room.id}>
+                  {room.id} ({room.name})
+                </option>
                 ))}
               </select>
             </div>
