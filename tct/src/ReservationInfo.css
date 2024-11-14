@@ -1,0 +1,148 @@
+.reservation-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+    max-width: 400px; /* 세로로 길게 보이도록 너비 제한 */
+    margin: auto;
+    background-color: #f8f9fa;
+    padding: 20px;
+    overflow-y: auto; /* 내용이 많을 경우 스크롤 가능 */
+  }
+  
+  .header {
+    width: 90%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .logo {
+    font-size: 24px;
+    font-weight: bold;
+  }
+  
+  .profile-icon {
+    font-size: 24px;
+    cursor: pointer;
+  }
+  
+  .title {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  .form-group {
+    width: 90%;
+    margin-bottom: 20px;
+  }
+  
+  .full-width {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+  
+  .form-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
+  
+  label {
+    font-size: 16px;
+    width: 48%;
+  }
+  
+  input {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .unlock-button, .next-button {
+    width: 90%;
+    padding: 15px;
+    font-size: 18px;
+    font-weight: bold;
+    background-color: #f0ad4e;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-bottom: 20px;
+  }
+  
+  .unlock-button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+  
+  .info-section {
+    display: flex;
+    flex-direction: column; /* 세로 방향 정렬 */
+    width: 90%;
+    margin-top: 20px;
+  }
+  
+  .image-section, .terms-section {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+  
+  .terms-text {
+    border: 1px solid #ddd;
+    padding: 10px;
+    height: 100px;
+    overflow-y: auto;
+  }
+  .image-section img {
+    width: 300px;
+    height: 300px;
+    object-fit: cover; /* 이미지가 비율에 맞게 잘리거나 늘어날 때 비율 유지 */
+    border-radius: 8px; /* 선택적으로 이미지 모서리를 둥글게 */
+  }
+  .modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 300px;
+    z-index: 1000;
+  }
+  
+  .modal-content h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  .toggle-group {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+  
+  .toggle-switch {
+    margin-left: 10px;
+  }
+  
+  .next-button {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    background-color: #f0ad4e;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+  
+  .next-button:hover {
+    background-color: #ec971f;
+  }
