@@ -64,8 +64,8 @@
 }
 
 .button_main_disabled {
-  background-color: #6c757d;
-  width: 100%;
+  background-color: lightgoldenrodyellow;
+  width: 30%;
   padding: 15px 0;
   font-size: 20px;
   font-weight: bold;
