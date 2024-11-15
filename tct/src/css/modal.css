@@ -115,7 +115,7 @@
 /* 모바일 화면에서의 웹캠 비디오 스타일 */
 @media (max-width: 768px) {
   .webcam-container video {
-      max-width: 300px; /* 모바일에서의 최대 너비 */
+    max-width: 300px; /* 모바일에서의 최대 너비 */
   }
 }
 
@@ -128,28 +128,43 @@
 }
 
 /* 캡처된 이미지들 스타일 */
+/* === Modified to display images in a 2x2 grid === */
 .captured-images {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 10px;
+  display: grid; /* Changed from flex to grid */
+  grid-template-columns: repeat(2, 1fr); /* Added to create two columns */
+  gap: 10px; /* Adjusted gap between images */
   margin-top: 20px;
+}
+
+/* 이미지 컨테이너 스타일 */
+.image-container {
+  position: relative;
+  width: 100%; /* Ensures each image container fills its grid cell */
 }
 
 /* 캡처된 이미지 스타일 */
 .captured-image {
   width: 100%;
-  max-width: 100px;
   height: auto;
   border: 2px solid #ccc;
   border-radius: 8px;
 }
 
-/* 반응형을 위한 미디어 쿼리 */
-@media (min-width: 769px) {
-  .captured-image {
-      max-width: 150px;
-  }
+/* 삭제 버튼 스타일 */
+.delete-button {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background-color: rgba(255, 0, 0, 0.7);
+  border: none;
+  color: white;
+  padding: 5px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.delete-button:hover {
+  background-color: rgba(255, 0, 0, 1);
 }
 
 /* 마진 클래스 추가 */
@@ -171,33 +186,4 @@
 /* mid 클래스 추가 */
 .mid {
   align-items: center;
-}
-
-/* 이미지 컨테이너 스타일 */
-.image-container {
-  position: relative;
-  display: inline-block;
-}
-
-.delete-button {
-  position: absolute;
-  top: 5px;
-  right: 5px;
-  background-color: rgba(255, 0, 0, 0.7);
-  border: none;
-  color: white;
-  padding: 5px;
-  border-radius: 50%;
-  cursor: pointer;
-}
-
-.delete-button:hover {
-  background-color: rgba(255, 0, 0, 1);
-}
-
-/* 반응형을 위한 미디어 쿼리 */
-@media (min-width: 769px) {
-  .captured-image {
-      max-width: 150px;
-  }
 }
