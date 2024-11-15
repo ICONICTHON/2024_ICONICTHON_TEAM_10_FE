@@ -58,6 +58,7 @@
 
 .button_main_disabled {
   background-color: #6c757d;
+  cursor: not-allowed;  
   width: 100%;
   padding: 15px 0;
   font-family: var(--main-font-bold);

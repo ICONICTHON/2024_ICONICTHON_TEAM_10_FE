@@ -14,9 +14,9 @@ function ReservationInfo() {
   const [showIoTModal, setShowIoTModal] = useState(false);
   const [isCameraOpen, setIsCameraOpen] = useState(false);
   const [capturedImage, setCapturedImage] = useState(null);
+  const [isCaptured, setIsCaptured] = useState(false); // 캡처 완료 여부
   const webcamRef = useRef(null);
 
-  // 서버에서 데이터 가져오기
   useEffect(() => {
     fetch('http://localhost:8000/api/start/', {
       method: 'GET',
@@ -59,13 +59,16 @@ function ReservationInfo() {
   };
 
   const openCamera = () => {
-    setIsCameraOpen(true);
+    setIsCameraOpen(true); // 카메라 기능 활성화
   };
 
   const capturePhoto = () => {
-    const imageSrc = webcamRef.current.getScreenshot();
-    setCapturedImage(imageSrc);
-    setIsCameraOpen(false);
+    if (!isCaptured) { // 캡처가 한 번만 수행되도록
+      const imageSrc = webcamRef.current.getScreenshot();
+      setCapturedImage(imageSrc);
+      setIsCameraOpen(false); // 캡처 후 카메라 닫기
+      setIsCaptured(true); // 캡처 완료 상태로 설정하여 '다음으로' 버튼 활성화
+    }
   };
 
   const videoConstraints = {
@@ -112,9 +115,37 @@ function ReservationInfo() {
           )}
         </div>
 
-        <button className="button_main yellow" onClick={handleUnlock} disabled={isUnlocked}>
-          잠금해제
-        </button>
+        <div className="form">
+          <label className="h4Font">유의사항</label> 
+          <label className="SmallFont box">
+            &nbsp;  - 이용시간 08:00-22:00 (1회 4시간 제한)
+            <br /> &nbsp; - 학생수업/실습/연구에 지장이 없는 경우만 승인
+            <br /> &nbsp; - 소음 발생 행사는 학림관 소강당만 가능
+            <br /> &nbsp; - 승인 후에도 학교 공식행사 발생 시 취소될 수 있음
+            <br /> &nbsp; - 대여 전후 강의실 상태 확인을 위한 사진 촬영 필수
+          </label>
+        </div>
+
+        <div className="action-row" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '10px', width: '75%' }}>
+          <div style={{ display: 'flex', alignItems: 'center' }}>
+            <img
+              src="/camera.png"
+              alt="Camera Icon"
+              onClick={openCamera}
+              style={{ cursor: 'pointer', width: '50px', height: '50px', marginRight: '5px' }}
+            />
+            <span className="NormalFont">사진</span>
+          </div>
+          <div style={{ display: 'flex', alignItems: 'center' }}>
+            <img
+              src="/lock.png"
+              alt="Unlock"
+              onClick={handleUnlock}
+              style={{ cursor: 'pointer', width: '50px', height: '50px', marginRight: '5px' }}
+            />
+            <span className="NormalFont">잠금해제</span>
+          </div>
+        </div>
 
         {showUnlockModal && (
           <div className="modal-overlay">
@@ -125,50 +156,43 @@ function ReservationInfo() {
           </div>
         )}
 
-        <div className="section">
-          <div className="form">
-            <label className="h4Font">사진</label>
-            {capturedImage ? (
-              <img className="image" src={capturedImage} alt="Captured" />
-            ) : (
-              <button
-  className="button_main blue mini-button"
-  onClick={openCamera}
-  style={{ marginBottom: '10px' }} // 인라인 스타일로 마진 추가
->
-  사진 찍기
-</button>
-            )}
-            {isCameraOpen && (
-  <div className="webcam-container">
-    <Webcam
-      audio={false}
-      ref={webcamRef}
-      screenshotFormat="image/jpeg"
-      videoConstraints={videoConstraints}
-      onUserMediaError={(error) => {
-        console.error('Webcam error:', error);
-        setIsCameraOpen(false);
-      }}
-      style={{ width: '100%', height: 'auto', maxWidth: '400px' }} // 인라인 스타일 추가
-    />
-    <button className="button_main red" onClick={capturePhoto}>캡처</button>
-  </div>
-)}
+        {isCameraOpen && !capturedImage && (
+          <div className="webcam-container">
+            <Webcam
+              audio={false}
+              ref={webcamRef}
+              screenshotFormat="image/jpeg"
+              videoConstraints={videoConstraints}
+              onUserMediaError={(error) => {
+                console.error('Webcam error:', error);
+                setIsCameraOpen(false);
+              }}
+              style={{ width: '80%', height: 'auto', maxWidth: '400px', marginTop: '10px' }}
+            />
+            <button className="button_main red" onClick={capturePhoto} style={{ width: '80%', marginTop: '10px' }}>
+              캡처
+            </button>
           </div>
-          <div className="form">
-            <label className="h4Font">유의사항</label> 
-            <label className="SmallFont box">
-              &nbsp;  - 이용시간 08:00-22:00 (1회 4시간 제한)
-              <br /> &nbsp; - 학생수업/실습/연구에 지장이 없는 경우만 승인
-              <br /> &nbsp; - 소음 발생 행사는 학림관 소강당만 가능
-              <br /> &nbsp; - 승인 후에도 학교 공식행사 발생 시 취소될 수 있음
-              <br /> &nbsp; - 대여 전후 강의실 상태 확인을 위한 사진 촬영 필수
-            </label>
-          </div>
-        </div>
+        )}
 
-        <button className="button_main yellow" onClick={handleNext}>
+        {/* 캡처된 이미지가 있는 경우 표시 */}
+        {capturedImage && (
+          <div className="captured-image-container" style={{ width: '80%', marginTop: '10px' }}>
+            <img src={capturedImage} alt="Captured" style={{ width: '100%', borderRadius: '5px' }} />
+          </div>
+        )}
+
+        <button
+          className="button_main yellow"
+          onClick={handleNext}
+          disabled={!isCaptured}
+          style={{
+            marginTop: '20px',
+            width: '80%',
+            backgroundColor: isCaptured ? '#ffd966' : '#d3d3d3',
+            color: isCaptured ? 'black' : '#6c6c6c'
+          }}
+        >
           다음으로
         </button>
       </main>
